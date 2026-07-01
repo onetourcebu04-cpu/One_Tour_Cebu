@@ -1393,7 +1393,12 @@
   const optionalToggle = document.getElementById('optionalToggle');
   const optionalStops = document.getElementById('optionalStops');
   const cityTourPanel = document.getElementById('cityTourPanel');
+  let optionalToggleLock = false; // guards against duplicate/ghost tap events on mobile
   optionalToggle.addEventListener('click', () => {
+    if(optionalToggleLock) return;
+    optionalToggleLock = true;
+    setTimeout(() => { optionalToggleLock = false; }, 450);
+
     const willOpen = !optionalStops.classList.contains('open');
     setAccordionHeight(optionalStops, willOpen);
     optionalToggle.setAttribute('aria-expanded', willOpen);
@@ -1402,10 +1407,10 @@
       : 'Want 2 more stops? Show optional add-ons (8–9)';
 
     // keep the outer City Tour panel tall enough to fit the new content
+    // (done synchronously right after, so there's no clipped in-between frame
+    // where the add-ons could look like they "flash and hide" on mobile)
     if(cityTourPanel.classList.contains('open')){
-      requestAnimationFrame(() => {
-        cityTourPanel.style.maxHeight = cityTourPanel.scrollHeight + 'px';
-      });
+      cityTourPanel.style.maxHeight = cityTourPanel.scrollHeight + 'px';
     }
   });
 
