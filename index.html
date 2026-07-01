@@ -532,14 +532,119 @@
     border:1px solid rgba(255,253,249,0.15);
     border-radius:18px;padding:34px 28px;
   }
+  .fleet-card-top{
+    display:flex;align-items:center;justify-content:space-between;
+    margin-bottom:18px;gap:12px;
+  }
   .fleet-card .seat-badge{
     display:inline-block;background:var(--gold);color:var(--teal-deep);
-    font-weight:700;font-size:.78rem;padding:5px 14px;border-radius:20px;margin-bottom:18px;
+    font-weight:700;font-size:.78rem;padding:5px 14px;border-radius:20px;
+    margin-bottom:0;
   }
+  .car-type-btn{
+    display:flex;align-items:center;gap:8px;
+    background:rgba(255,253,249,0.08);
+    border:1px solid rgba(255,253,249,0.25);
+    color:var(--cream);
+    padding:5px 14px 5px 6px;
+    border-radius:20px;
+    cursor:pointer;
+    font-family:'Inter',sans-serif;
+    font-size:.78rem;font-weight:600;
+    transition:background .2s ease, border-color .2s ease, transform .2s ease;
+  }
+  .car-type-btn:hover{background:rgba(255,253,249,0.16);border-color:rgba(255,253,249,0.4);transform:translateY(-1px);}
+  .car-type-btn img{
+    width:26px;height:26px;border-radius:50%;object-fit:cover;
+    background:#fff;flex-shrink:0;
+  }
+  .car-type-btn span{white-space:nowrap;}
+
   .fleet-card h3{font-size:1.4rem;margin-bottom:10px;}
   .fleet-card p{color:rgba(255,253,249,0.68);font-size:.94rem;margin-bottom:20px;}
   .fleet-card ul{list-style:none;font-size:.9rem;color:rgba(255,253,249,0.85);display:flex;flex-direction:column;gap:8px;}
   .fleet-card li::before{content:'— ';color:var(--coral);}
+
+  /* ---------- CAR TYPE MODAL ---------- */
+  .car-modal-overlay{
+    position:fixed;inset:0;z-index:200;
+    background:rgba(11,61,58,0.82);
+    display:flex;align-items:center;justify-content:center;
+    padding:24px;
+    opacity:0;pointer-events:none;
+    transition:opacity .25s ease;
+  }
+  .car-modal-overlay.open{opacity:1;pointer-events:all;}
+  .car-modal{
+    background:var(--cream);
+    border-radius:20px;
+    width:100%;max-width:640px;
+    max-height:88vh;
+    overflow:hidden;
+    display:flex;flex-direction:column;
+    transform:translateY(16px) scale(.97);
+    transition:transform .25s ease;
+  }
+  .car-modal-overlay.open .car-modal{transform:translateY(0) scale(1);}
+  .car-modal-head{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:20px 24px;border-bottom:1px solid var(--line);
+  }
+  .car-modal-head h3{font-size:1.2rem;color:var(--teal-deep);}
+  .car-modal-close{
+    background:none;border:none;cursor:pointer;
+    width:34px;height:34px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    color:var(--teal-deep);
+    transition:background .2s ease;
+  }
+  .car-modal-close:hover{background:rgba(11,61,58,0.08);}
+  .car-modal-close svg{width:18px;height:18px;}
+
+  .car-modal-stage{
+    position:relative;
+    background:rgba(11,61,58,0.05);
+    aspect-ratio:16/10;
+    display:flex;align-items:center;justify-content:center;
+    overflow:hidden;
+  }
+  .car-modal-stage img{
+    width:100%;height:100%;object-fit:cover;
+    display:block;
+  }
+  .car-modal-nav{
+    position:absolute;top:50%;transform:translateY(-50%);
+    width:40px;height:40px;border-radius:50%;
+    background:rgba(255,253,249,0.9);
+    border:none;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    color:var(--teal-deep);
+    box-shadow:0 4px 12px rgba(11,61,58,0.2);
+    transition:background .2s ease, transform .2s ease;
+  }
+  .car-modal-nav:hover{background:#fff;transform:translateY(-50%) scale(1.06);}
+  .car-modal-nav.prev{left:14px;}
+  .car-modal-nav.next{right:14px;}
+  .car-modal-nav svg{width:18px;height:18px;}
+
+  .car-modal-thumbs{
+    display:flex;gap:10px;padding:16px 24px;overflow-x:auto;
+  }
+  .car-modal-thumbs img{
+    width:64px;height:48px;object-fit:cover;border-radius:8px;
+    cursor:pointer;flex-shrink:0;
+    border:2px solid transparent;
+    opacity:.6;
+    transition:opacity .2s ease, border-color .2s ease;
+  }
+  .car-modal-thumbs img:hover{opacity:.9;}
+  .car-modal-thumbs img.active{opacity:1;border-color:var(--coral);}
+
+  @media(max-width:520px){
+    .fleet-card-top{flex-wrap:wrap;}
+    .car-type-btn span{display:none;}
+    .car-type-btn{padding:5px;}
+  }
 
   /* ---------- WHY US ---------- */
   .why-grid{
@@ -951,7 +1056,13 @@
   </div>
   <div class="fleet-grid">
     <div class="fleet-card">
-      <span class="seat-badge">4–6 seats</span>
+      <div class="fleet-card-top">
+        <button type="button" class="car-type-btn" data-car="sedan" aria-haspopup="dialog">
+          <img src="https://onetourcebu04-cpu.github.io/OTC_site_files/vios.jpg" alt="">
+          <span>Car type</span>
+        </button>
+        <span class="seat-badge">4–6 seats</span>
+      </div>
       <h3>Family Sedan</h3>
       <p>Easy and affordable for couples or small families doing the city tour.</p>
       <ul>
@@ -962,7 +1073,13 @@
     </div>
 
     <div class="fleet-card">
-      <span class="seat-badge">8–11 seats</span>
+      <div class="fleet-card-top">
+        <button type="button" class="car-type-btn" data-car="van" aria-haspopup="dialog">
+          <img src="https://onetourcebu04-cpu.github.io/OTC_site_files/toyotahiace.jpg" alt="">
+          <span>Car type</span>
+        </button>
+        <span class="seat-badge">8–11 seats</span>
+      </div>
       <h3>Tourist Van</h3>
       <p>Our most-booked option — roomy enough for the full heritage route in comfort.</p>
       <ul>
@@ -974,6 +1091,27 @@
 
   </div>
 </section>
+
+<div class="car-modal-overlay" id="carModalOverlay" role="dialog" aria-modal="true" aria-labelledby="carModalTitle">
+  <div class="car-modal">
+    <div class="car-modal-head">
+      <h3 id="carModalTitle">Family Sedan</h3>
+      <button type="button" class="car-modal-close" id="carModalClose" aria-label="Close">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <div class="car-modal-stage">
+      <button type="button" class="car-modal-nav prev" id="carModalPrev" aria-label="Previous photo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <img id="carModalImg" src="" alt="">
+      <button type="button" class="car-modal-nav next" id="carModalNext" aria-label="Next photo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+      </button>
+    </div>
+    <div class="car-modal-thumbs" id="carModalThumbs"></div>
+  </div>
+</div>
 
 <section id="why">
   <div class="section-head">
@@ -1081,6 +1219,100 @@
     optionalToggle.querySelector('.toggle-text').textContent = isOpen
       ? 'Hide optional add-ons (8–9)'
       : 'Want 2 more stops? Show optional add-ons (8–9)';
+  });
+
+  /* ---------- CAR TYPE GALLERY ---------- */
+  const carGalleries = {
+    sedan: {
+      title: 'Family Sedan',
+      images: [
+        'https://onetourcebu04-cpu.github.io/OTC_site_files/vios.jpg',
+        'https://onetourcebu04-cpu.github.io/OTC_site_files/avanza2026.jpg',
+        'https://onetourcebu04-cpu.github.io/OTC_site_files/Toyota-Innova.jpg'
+      ]
+    },
+    van: {
+      title: 'Tourist Van',
+      images: [
+        'https://onetourcebu04-cpu.github.io/OTC_site_files/toyotahiace.jpg'
+      ]
+    }
+  };
+
+  const carModalOverlay = document.getElementById('carModalOverlay');
+  const carModalTitle   = document.getElementById('carModalTitle');
+  const carModalImg     = document.getElementById('carModalImg');
+  const carModalThumbs  = document.getElementById('carModalThumbs');
+  const carModalPrev    = document.getElementById('carModalPrev');
+  const carModalNext    = document.getElementById('carModalNext');
+  const carModalClose   = document.getElementById('carModalClose');
+
+  let currentCarImages = [];
+  let currentCarIndex = 0;
+
+  function renderCarSlide(){
+    carModalImg.src = currentCarImages[currentCarIndex];
+    carModalImg.alt = carModalTitle.textContent + ' photo ' + (currentCarIndex + 1);
+    carModalThumbs.querySelectorAll('img').forEach((t, i) => {
+      t.classList.toggle('active', i === currentCarIndex);
+    });
+    const multi = currentCarImages.length > 1;
+    carModalPrev.style.display = multi ? 'flex' : 'none';
+    carModalNext.style.display = multi ? 'flex' : 'none';
+  }
+
+  function openCarModal(type){
+    const data = carGalleries[type];
+    if(!data) return;
+    currentCarImages = data.images;
+    currentCarIndex = 0;
+    carModalTitle.textContent = data.title;
+
+    carModalThumbs.innerHTML = '';
+    if(data.images.length > 1){
+      data.images.forEach((src, i) => {
+        const t = document.createElement('img');
+        t.src = src;
+        t.alt = data.title + ' thumbnail ' + (i + 1);
+        t.addEventListener('click', () => { currentCarIndex = i; renderCarSlide(); });
+        carModalThumbs.appendChild(t);
+      });
+      carModalThumbs.style.display = 'flex';
+    } else {
+      carModalThumbs.style.display = 'none';
+    }
+
+    renderCarSlide();
+    carModalOverlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeCarModal(){
+    carModalOverlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll('.car-type-btn').forEach(btn => {
+    btn.addEventListener('click', () => openCarModal(btn.dataset.car));
+  });
+
+  carModalClose.addEventListener('click', closeCarModal);
+  carModalOverlay.addEventListener('click', (e) => {
+    if(e.target === carModalOverlay) closeCarModal();
+  });
+  carModalPrev.addEventListener('click', () => {
+    currentCarIndex = (currentCarIndex - 1 + currentCarImages.length) % currentCarImages.length;
+    renderCarSlide();
+  });
+  carModalNext.addEventListener('click', () => {
+    currentCarIndex = (currentCarIndex + 1) % currentCarImages.length;
+    renderCarSlide();
+  });
+  document.addEventListener('keydown', (e) => {
+    if(!carModalOverlay.classList.contains('open')) return;
+    if(e.key === 'Escape') closeCarModal();
+    if(e.key === 'ArrowLeft') carModalPrev.click();
+    if(e.key === 'ArrowRight') carModalNext.click();
   });
 </script>
 
