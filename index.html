@@ -376,7 +376,7 @@
     transition:opacity .4s ease, transform .4s ease;
   }
   .slide-back p{
-    font-size:.875rem;color:#3c4f4d;line-height:1.65;flex:1;overflow-y:auto;
+    font-size:.875rem;color:#3c4f4d;line-height:1.65;flex:1;overflow-y:auto;min-height:0;
     opacity:0;transform:translateY(14px);
     transition:opacity .4s ease, transform .4s ease;
   }
@@ -508,7 +508,6 @@
     transition:max-height .5s ease, opacity .4s ease, margin-top .5s ease;
   }
   .optional-route.open{
-    max-height:1200px;
     opacity:1;
     margin-top:48px;
   }
@@ -565,7 +564,6 @@
     transition:max-height .5s ease, opacity .4s ease;
   }
   .tour-accordion-panel.open{
-    max-height:4000px;
     opacity:1;
   }
   .tour-accordion-panel-inner{
@@ -1355,22 +1353,52 @@
   });
 
   /* ---------- TOUR ACCORDION (City / South / North) ---------- */
+  /* ---------- TOUR ACCORDION (City / South / North) ---------- */
+  function setAccordionHeight(panel, open){
+    if(open){
+      panel.classList.add('open');
+      panel.style.maxHeight = panel.scrollHeight + 'px';
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + 'px'; // lock current height first
+      requestAnimationFrame(() => {
+        panel.style.maxHeight = '0px';
+      });
+      panel.classList.remove('open');
+    }
+  }
+
   document.querySelectorAll('.tour-accordion-header').forEach(btn => {
+    const panel = document.getElementById(btn.getAttribute('aria-controls'));
     btn.addEventListener('click', () => {
-      const panel = document.getElementById(btn.getAttribute('aria-controls'));
-      const isOpen = panel.classList.toggle('open');
-      btn.setAttribute('aria-expanded', isOpen);
+      const willOpen = !panel.classList.contains('open');
+      setAccordionHeight(panel, willOpen);
+      btn.setAttribute('aria-expanded', willOpen);
+    });
+  });
+
+  window.addEventListener('resize', () => {
+    document.querySelectorAll('.tour-accordion-panel.open, .optional-route.open').forEach(panel => {
+      panel.style.maxHeight = panel.scrollHeight + 'px';
     });
   });
 
   const optionalToggle = document.getElementById('optionalToggle');
   const optionalStops = document.getElementById('optionalStops');
+  const cityTourPanel = document.getElementById('cityTourPanel');
   optionalToggle.addEventListener('click', () => {
-    const isOpen = optionalStops.classList.toggle('open');
-    optionalToggle.setAttribute('aria-expanded', isOpen);
-    optionalToggle.querySelector('.toggle-text').textContent = isOpen
+    const willOpen = !optionalStops.classList.contains('open');
+    setAccordionHeight(optionalStops, willOpen);
+    optionalToggle.setAttribute('aria-expanded', willOpen);
+    optionalToggle.querySelector('.toggle-text').textContent = willOpen
       ? 'Hide optional add-ons (8–9)'
       : 'Want 2 more stops? Show optional add-ons (8–9)';
+
+    // keep the outer City Tour panel tall enough to fit the new content
+    if(cityTourPanel.classList.contains('open')){
+      requestAnimationFrame(() => {
+        cityTourPanel.style.maxHeight = cityTourPanel.scrollHeight + 'px';
+      });
+    }
   });
 
   /* ---------- CAR TYPE GALLERY ---------- */
