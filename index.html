@@ -525,58 +525,51 @@
     .optional-route{transition:none;}
   }
 
-  /* ---------- TOUR ACCORDION (City / South / North) ---------- */
-  .tour-accordion{
-    max-width:920px;margin:0 auto;
-    display:flex;flex-direction:column;gap:18px;
+  /* ---------- TOUR TABS (City / South / North) ---------- */
+  .tour-tabs{
+    max-width:640px;margin:0 auto 22px;
+    display:flex;gap:6px;
+    background:var(--sand);
+    border-radius:999px;
+    padding:6px;
   }
-  .tour-accordion-item{
+  .tour-tab{
+    flex:1;
+    border:none;background:transparent;
+    color:var(--teal-deep);
+    font-family:'Inter',sans-serif;font-weight:600;
+    font-size:.95rem;
+    padding:12px 10px;
+    border-radius:999px;
+    cursor:pointer;
+    transition:background .2s ease, color .2s ease;
+  }
+  .tour-tab:hover:not(.active){background:rgba(11,61,58,0.08);}
+  .tour-tab.active{background:var(--teal-deep);color:var(--cream);}
+
+  .tour-panel-card{
+    max-width:920px;margin:0 auto;
     border:1px solid var(--line);
     border-radius:20px;
     background:#fff;
     overflow:hidden;
   }
-  .tour-accordion-header{
-    width:100%;
-    display:flex;align-items:center;justify-content:space-between;
-    gap:16px;
-    padding:26px 30px;
-    background:none;border:none;
-    cursor:pointer;
-    text-align:left;
-    font-family:'Inter',sans-serif;
-    transition:background .2s ease;
+  .tour-panel{display:none;}
+  .tour-panel.active{display:block;}
+
+  .tour-panel-head{
+    padding:26px 30px 18px;
+    border-bottom:1px solid var(--line);
   }
-  .tour-accordion-header:hover{background:rgba(11,61,58,0.03);}
-  .tour-accordion-title h3{
+  .tour-panel-head h3{
     font-family:'Fraunces',serif;font-weight:600;
     font-size:1.3rem;color:var(--teal-deep);margin-bottom:4px;
   }
-  .tour-accordion-title span{
+  .tour-panel-head span{
     font-size:.85rem;color:#5a6a68;font-weight:400;
   }
-  .tour-accordion-chevron{
-    width:38px;height:38px;border-radius:50%;
-    background:var(--sand);
-    display:flex;align-items:center;justify-content:center;
-    flex-shrink:0;
-    transition:transform .35s ease, background .25s ease;
-  }
-  .tour-accordion-chevron svg{width:16px;height:16px;stroke:var(--teal-deep);}
-  .tour-accordion-header[aria-expanded="true"] .tour-accordion-chevron{transform:rotate(180deg);background:var(--gold);}
-
-  .tour-accordion-panel{
-    max-height:0;
-    opacity:0;
-    overflow:hidden;
-    transition:max-height .5s ease, opacity .4s ease;
-  }
-  .tour-accordion-panel.open{
-    opacity:1;
-  }
   .tour-accordion-panel-inner{
-    padding:30px 30px 34px;
-    border-top:1px solid var(--line);
+    padding:26px 30px 34px;
   }
 
   .coming-soon{
@@ -589,14 +582,11 @@
   }
   .coming-soon p{color:#5a6a68;font-size:.95rem;}
 
-  @media (prefers-reduced-motion: reduce){
-    .tour-accordion-panel{transition:none;}
-  }
-
   @media(max-width:480px){
-    .tour-accordion-header{padding:20px 20px;}
-    .tour-accordion-title h3{font-size:1.1rem;}
-    .tour-accordion-panel-inner{padding:26px 20px 28px;}
+    .tour-tab{font-size:.8rem;padding:10px 6px;}
+    .tour-panel-head{padding:20px 20px 14px;}
+    .tour-panel-head h3{font-size:1.1rem;}
+    .tour-accordion-panel-inner{padding:22px 20px 28px;}
     .coming-soon{gap:12px;}
   }
 
@@ -1006,22 +996,21 @@
     <p>Start with our signature City Tour — a full-day loop from the birthplace of Philippine Christianity to the highest hills overlooking Cebu City. South and North Cebu routes are on the way, so there's more of the province to explore soon.</p>
   </div>
 
-  <div class="tour-accordion">
+  <div class="tour-tabs" role="tablist" aria-label="Choose a tour route">
+    <button type="button" class="tour-tab active" id="cityTourToggle" role="tab" aria-selected="true" aria-controls="cityTourPanel">City Tour</button>
+    <button type="button" class="tour-tab" id="southTourToggle" role="tab" aria-selected="false" aria-controls="southTourPanel">South Cebu</button>
+    <button type="button" class="tour-tab" id="northTourToggle" role="tab" aria-selected="false" aria-controls="northTourPanel">North Cebu</button>
+  </div>
+
+  <div class="tour-panel-card">
 
     <!-- CITY TOUR -->
-    <div class="tour-accordion-item">
-      <button type="button" class="tour-accordion-header" id="cityTourToggle" aria-expanded="false" aria-controls="cityTourPanel">
-        <div class="tour-accordion-title">
-          <h3>City Tour</h3>
-          <span>7–9 stops · The Heritage &amp; Hills Route</span>
-        </div>
-        <span class="tour-accordion-chevron">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-        </span>
-      </button>
-
-      <div class="tour-accordion-panel" id="cityTourPanel">
-        <div class="tour-accordion-panel-inner">
+    <div class="tour-panel active" id="cityTourPanel" role="tabpanel" aria-labelledby="cityTourToggle">
+      <div class="tour-panel-head">
+        <h3>City Tour</h3>
+        <span>7–9 stops · The Heritage &amp; Hills Route</span>
+      </div>
+      <div class="tour-accordion-panel-inner">
 
   <div class="route">
 
@@ -1146,50 +1135,33 @@
 
   </div>
 
-        </div>
       </div>
     </div>
 
     <!-- SOUTH CEBU TOUR -->
-    <div class="tour-accordion-item">
-      <button type="button" class="tour-accordion-header" id="southTourToggle" aria-expanded="false" aria-controls="southTourPanel">
-        <div class="tour-accordion-title">
-          <h3>South Cebu Tour</h3>
-          <span>Waterfalls, canyoneering &amp; the southern coast</span>
-        </div>
-        <span class="tour-accordion-chevron">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-        </span>
-      </button>
-
-      <div class="tour-accordion-panel" id="southTourPanel">
-        <div class="tour-accordion-panel-inner">
-          <div class="coming-soon">
-            <span class="coming-soon-badge">Coming Soon</span>
-            <p>We're putting together the South Cebu route. Check back soon, or message us on Facebook and we'll let you know when it's ready.</p>
-          </div>
+    <div class="tour-panel" id="southTourPanel" role="tabpanel" aria-labelledby="southTourToggle" hidden>
+      <div class="tour-panel-head">
+        <h3>South Cebu Tour</h3>
+        <span>Waterfalls, canyoneering &amp; the southern coast</span>
+      </div>
+      <div class="tour-accordion-panel-inner">
+        <div class="coming-soon">
+          <span class="coming-soon-badge">Coming Soon</span>
+          <p>We're putting together the South Cebu route. Check back soon, or message us on Facebook and we'll let you know when it's ready.</p>
         </div>
       </div>
     </div>
 
     <!-- NORTH CEBU TOUR -->
-    <div class="tour-accordion-item">
-      <button type="button" class="tour-accordion-header" id="northTourToggle" aria-expanded="false" aria-controls="northTourPanel">
-        <div class="tour-accordion-title">
-          <h3>North Cebu Tour</h3>
-          <span>Beaches, whale sharks &amp; the northern towns</span>
-        </div>
-        <span class="tour-accordion-chevron">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-        </span>
-      </button>
-
-      <div class="tour-accordion-panel" id="northTourPanel">
-        <div class="tour-accordion-panel-inner">
-          <div class="coming-soon">
-            <span class="coming-soon-badge">Coming Soon</span>
-            <p>We're putting together the North Cebu route. Check back soon, or message us on Facebook and we'll let you know when it's ready.</p>
-          </div>
+    <div class="tour-panel" id="northTourPanel" role="tabpanel" aria-labelledby="northTourToggle" hidden>
+      <div class="tour-panel-head">
+        <h3>North Cebu Tour</h3>
+        <span>Beaches, whale sharks &amp; the northern towns</span>
+      </div>
+      <div class="tour-accordion-panel-inner">
+        <div class="coming-soon">
+          <span class="coming-soon-badge">Coming Soon</span>
+          <p>We're putting together the North Cebu route. Check back soon, or message us on Facebook and we'll let you know when it's ready.</p>
         </div>
       </div>
     </div>
@@ -1360,8 +1332,23 @@
     if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); toggleSlide(); }
   });
 
-  /* ---------- TOUR ACCORDION (City / South / North) ---------- */
-  /* ---------- TOUR ACCORDION (City / South / North) ---------- */
+  /* ---------- TOUR TABS (City / South / North) ---------- */
+  const tourTabs = document.querySelectorAll('.tour-tab');
+  const tourPanels = document.querySelectorAll('.tour-panel');
+  tourTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      if(tab.classList.contains('active')) return;
+      tourTabs.forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected','false'); });
+      tourPanels.forEach(p => { p.classList.remove('active'); p.hidden = true; });
+      tab.classList.add('active');
+      tab.setAttribute('aria-selected','true');
+      const target = document.getElementById(tab.getAttribute('aria-controls'));
+      target.classList.add('active');
+      target.hidden = false;
+    });
+  });
+
+  /* ---------- OPTIONAL ADD-ONS (8-9), nested inside City Tour panel ---------- */
   function setAccordionHeight(panel, open){
     if(open){
       panel.classList.add('open');
@@ -1375,24 +1362,13 @@
     }
   }
 
-  document.querySelectorAll('.tour-accordion-header').forEach(btn => {
-    const panel = document.getElementById(btn.getAttribute('aria-controls'));
-    btn.addEventListener('click', () => {
-      const willOpen = !panel.classList.contains('open');
-      setAccordionHeight(panel, willOpen);
-      btn.setAttribute('aria-expanded', willOpen);
-    });
-  });
-
   window.addEventListener('resize', () => {
-    document.querySelectorAll('.tour-accordion-panel.open, .optional-route.open').forEach(panel => {
-      panel.style.maxHeight = panel.scrollHeight + 'px';
-    });
+    const opt = document.querySelector('.optional-route.open');
+    if(opt) opt.style.maxHeight = opt.scrollHeight + 'px';
   });
 
   const optionalToggle = document.getElementById('optionalToggle');
   const optionalStops = document.getElementById('optionalStops');
-  const cityTourPanel = document.getElementById('cityTourPanel');
   let optionalToggleLock = false; // guards against duplicate/ghost tap events on mobile
   optionalToggle.addEventListener('click', () => {
     if(optionalToggleLock) return;
@@ -1405,13 +1381,6 @@
     optionalToggle.querySelector('.toggle-text').textContent = willOpen
       ? 'Hide optional add-ons (8–9)'
       : 'Want 2 more stops? Show optional add-ons (8–9)';
-
-    // keep the outer City Tour panel tall enough to fit the new content
-    // (done synchronously right after, so there's no clipped in-between frame
-    // where the add-ons could look like they "flash and hide" on mobile)
-    if(cityTourPanel.classList.contains('open')){
-      cityTourPanel.style.maxHeight = cityTourPanel.scrollHeight + 'px';
-    }
   });
 
   /* ---------- CAR TYPE GALLERY ---------- */
