@@ -525,7 +525,7 @@
     .optional-route{transition:none;}
   }
 
-  /* ---------- TOUR TABS (City / South / North) ---------- */
+  /* ---------- TOUR TABS (City / Mountain / Round Trip A / Round Trip B) ---------- */
   .tour-tabs{
     max-width:640px;margin:0 auto 22px;
     display:flex;gap:6px;
@@ -548,7 +548,7 @@
   .tour-tab.active{background:var(--teal-deep);color:var(--cream);}
 
   .tour-panel-card{
-    max-width:920px;margin:0 auto;
+    max-width:850px;margin:0 auto;
     border:1px solid var(--line);
     border-radius:20px;
     background:#fff;
@@ -556,6 +556,34 @@
   }
   .tour-panel{display:none;}
   .tour-panel.active{display:block;}
+
+  .tour-panel-photo{
+    height:300px;
+    background-size:cover;
+    background-position:center;
+  }
+  .tour-panel-photo.tour-panel-video{
+    position:relative;
+    overflow:hidden;
+    background:var(--teal-deep);
+  }
+  .tour-panel-photo.tour-panel-video iframe{
+    position:absolute;
+    top:50%;left:50%;
+    border:none;
+    pointer-events:none;
+    transform:translate(-50%,-50%);
+  }
+  .tour-panel-photo.placeholder{
+    display:flex;align-items:center;justify-content:center;
+    background:linear-gradient(135deg, var(--teal-deep), var(--teal-mid));
+  }
+  .tour-panel-photo.placeholder span{
+    color:rgba(255,253,249,0.85);
+    font-size:.85rem;font-weight:500;letter-spacing:.02em;
+    border:1px solid rgba(255,253,249,0.35);
+    padding:8px 16px;border-radius:999px;
+  }
 
   .tour-panel-head{
     padding:26px 30px 18px;
@@ -584,6 +612,7 @@
 
   @media(max-width:480px){
     .tour-tab{font-size:.8rem;padding:10px 6px;}
+    .tour-panel-photo{height:130px;}
     .tour-panel-head{padding:20px 20px 14px;}
     .tour-panel-head h3{font-size:1.1rem;}
     .tour-accordion-panel-inner{padding:22px 20px 28px;}
@@ -993,156 +1022,30 @@
   <div class="section-head">
     <span class="eyebrow">Cebu, one route at a time</span>
     <h2>Pick a route. We'll handle the rest.</h2>
-    <p>Start with our signature City Tour — a full-day loop from the birthplace of Philippine Christianity to the highest hills overlooking Cebu City. Head south for waterfalls, canyons, and whale sharks — or check back soon for our North Cebu route.</p>
+    <p>Four routes, each built around a different side of the province — heritage churches downtown, hilltop viewpoints, and two whale-shark round trips down south.</p>
   </div>
 
   <div class="tour-tabs" role="tablist" aria-label="Choose a tour route">
     <button type="button" class="tour-tab active" id="cityTourToggle" role="tab" aria-selected="true" aria-controls="cityTourPanel">City Tour</button>
-    <button type="button" class="tour-tab" id="southTourToggle" role="tab" aria-selected="false" aria-controls="southTourPanel">South Cebu</button>
-    <button type="button" class="tour-tab" id="northTourToggle" role="tab" aria-selected="false" aria-controls="northTourPanel">North Cebu</button>
+    <button type="button" class="tour-tab" id="mountainTourToggle" role="tab" aria-selected="false" aria-controls="mountainTourPanel">Mountain Tour</button>
+    <button type="button" class="tour-tab" id="roundTripAToggle" role="tab" aria-selected="false" aria-controls="roundTripAPanel">Round Trip A</button>
+    <button type="button" class="tour-tab" id="roundTripBToggle" role="tab" aria-selected="false" aria-controls="roundTripBPanel">Round Trip B</button>
   </div>
 
   <div class="tour-panel-card">
 
     <!-- CITY TOUR -->
     <div class="tour-panel active" id="cityTourPanel" role="tabpanel" aria-labelledby="cityTourToggle">
+      <div class="tour-panel-photo tour-panel-video" id="cityTourVideoWrap">
+        <iframe id="cityTourVideoFrame"
+          src="https://www.youtube.com/embed/o4bzjv-5zpk?autoplay=1&mute=1&loop=1&playlist=o4bzjv-5zpk&controls=0&showinfo=0&modestbranding=1&playsinline=1&rel=0&iv_load_policy=3"
+          title="City Tour highlight video" frameborder="0"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
+      </div>
       <div class="tour-panel-head">
         <h3>City Tour</h3>
-        <span>7–9 stops · The Heritage &amp; Hills Route</span>
-      </div>
-      <div class="tour-accordion-panel-inner">
-
-  <div class="route">
-
-    <div class="stop reveal">
-      <div class="stop-num">1</div>
-      <div class="stop-card">
-        <div>
-          <span class="stop-tag">Where it began</span>
-          <h3>Sto. Niño Church</h3>
-          <p>The oldest Roman Catholic church in the Philippines, home to the revered Sto. Niño image — the heart of Cebu's faith.</p>
-        </div>
-        <div class="stop-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M12 2l3 5h-2v3h4l1 3h-2v9H8v-9H6l1-3h4V7H9l3-5z"/></svg></div>
-      </div>
-    </div>
-
-    <div class="stop reveal">
-      <div class="stop-num">2</div>
-      <div class="stop-card">
-        <div>
-          <span class="stop-tag">First landmark</span>
-          <h3>Magellan's Cross</h3>
-          <p>Planted in 1521, this wooden cross marks the spot where Christianity was first introduced to the islands.</p>
-        </div>
-        <div class="stop-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M12 2v20M6 8h12"/></svg></div>
-      </div>
-    </div>
-
-    <div class="stop reveal">
-      <div class="stop-num">3</div>
-      <div class="stop-card">
-        <div>
-          <span class="stop-tag">Oldest fort</span>
-          <h3>Fort San Pedro</h3>
-          <p>A triangular Spanish military fortress by the harbor, now a quiet garden-and-museum stop with centuries of history in its walls.</p>
-        </div>
-        <div class="stop-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M4 21V9l8-6 8 6v12M9 21v-7h6v7"/></svg></div>
-      </div>
-    </div>
-
-    <div class="stop reveal">
-      <div class="stop-num">4</div>
-      <div class="stop-card">
-        <div>
-          <span class="stop-tag">Quiet & red</span>
-          <h3>Taoist Temple</h3>
-          <p>A serene hillside temple with sweeping city views, dragon-carved stairways, and a place to make a quiet wish.</p>
-        </div>
-        <div class="stop-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 010 18 4.5 4.5 0 010-9 4.5 4.5 0 000-9z"/></svg></div>
-      </div>
-    </div>
-
-    <div class="stop reveal">
-      <div class="stop-num">5</div>
-      <div class="stop-card">
-        <div>
-          <span class="stop-tag">City from above</span>
-          <h3>Tops Lookout</h3>
-          <p>The highest viewpoint over Cebu City and the strait beyond — best for sunset and skyline photos.</p>
-        </div>
-        <div class="stop-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M3 17l5-7 4 5 3-4 6 6H3z"/></svg></div>
-      </div>
-    </div>
-
-    <div class="stop reveal">
-      <div class="stop-num">6</div>
-      <div class="stop-card">
-        <div>
-          <span class="stop-tag">A son's tribute</span>
-          <h3>Temple of Leah</h3>
-          <p>Cebu's own "Taj Mahal" — a grand Roman-inspired temple built as a monument to lasting love.</p>
-        </div>
-        <div class="stop-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M4 21h16M6 21V10l6-5 6 5v11M10 21v-6h4v6"/></svg></div>
-      </div>
-    </div>
-
-    <div class="stop reveal">
-      <div class="stop-num">7</div>
-      <div class="stop-card">
-        <div>
-          <span class="stop-tag">Last stop, golden hour</span>
-          <h3>Sirao Garden</h3>
-          <p>Famously known as the "Little Amsterdam of Cebu," a vibrant hillside flower farm in the mountains of Busay, Cebu City.</p>
-        </div>
-        <div class="stop-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><circle cx="12" cy="8" r="3"/><path d="M12 11v10M9 21h6"/></svg></div>
-      </div>
-    </div>
-
-  </div>
-
-  <div class="optional-toggle-wrap">
-    <button class="optional-toggle" id="optionalToggle" aria-expanded="false" aria-controls="optionalStops">
-      <span class="toggle-text">Want 2 more stops? Show optional add-ons (8–9)</span>
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-    </button>
-  </div>
-
-  <div class="route optional-route" id="optionalStops">
-
-    <div class="stop reveal">
-      <div class="stop-num">8</div>
-      <div class="stop-card">
-        <div>
-          <span class="stop-tag">Optional add-on</span>
-          <h3>Buwakan ni Alejandra</h3>
-          <p>A colorful mountain garden with thousands of blooming flowers, scenic viewpoints, and relaxing nature walks.</p>
-        </div>
-        <div class="stop-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><circle cx="12" cy="8" r="3"/><path d="M12 11v10M9 21h6"/></svg></div>
-      </div>
-    </div>
-
-    <div class="stop reveal">
-      <div class="stop-num">9</div>
-      <div class="stop-card">
-        <div>
-          <span class="stop-tag">Optional add-on</span>
-          <h3>10,000 Roses</h3>
-          <p>A flower-filled garden café in the hills — the prettiest place to end the day with a coffee and a view.</p>
-        </div>
-        <div class="stop-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><circle cx="12" cy="8" r="3"/><path d="M12 11v10M9 21h6"/></svg></div>
-      </div>
-    </div>
-
-  </div>
-
-      </div>
-    </div>
-
-    <!-- SOUTH CEBU TOUR -->
-    <div class="tour-panel" id="southTourPanel" role="tabpanel" aria-labelledby="southTourToggle" hidden>
-      <div class="tour-panel-head">
-        <h3>South Cebu Tour</h3>
-        <span>Waterfalls, whale sharks &amp; the southern coast</span>
+        <span>4 stops · Heritage of Cebu</span>
       </div>
       <div class="tour-accordion-panel-inner">
 
@@ -1150,6 +1053,42 @@
 
           <div class="stop reveal">
             <div class="stop-num">1</div>
+            <div class="stop-card">
+              <div>
+                <span class="stop-tag">Where it began</span>
+                <h3>Sto. Niño Church</h3>
+                <p>The oldest Roman Catholic church in the Philippines, home to the revered Sto. Niño image — the heart of Cebu's faith.</p>
+              </div>
+              <div class="stop-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M12 2l3 5h-2v3h4l1 3h-2v9H8v-9H6l1-3h4V7H9l3-5z"/></svg></div>
+            </div>
+          </div>
+
+          <div class="stop reveal">
+            <div class="stop-num">2</div>
+            <div class="stop-card">
+              <div>
+                <span class="stop-tag">Oldest fort</span>
+                <h3>Fort San Pedro</h3>
+                <p>A triangular Spanish military fortress by the harbor, now a quiet garden-and-museum stop with centuries of history in its walls.</p>
+              </div>
+              <div class="stop-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M4 21V9l8-6 8 6v12M9 21v-7h6v7"/></svg></div>
+            </div>
+          </div>
+
+          <div class="stop reveal">
+            <div class="stop-num">3</div>
+            <div class="stop-card">
+              <div>
+                <span class="stop-tag">First landmark</span>
+                <h3>Magellan's Cross</h3>
+                <p>Planted in 1521, this wooden cross marks the spot where Christianity was first introduced to the islands.</p>
+              </div>
+              <div class="stop-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M12 2v20M6 8h12"/></svg></div>
+            </div>
+          </div>
+
+          <div class="stop reveal">
+            <div class="stop-num">4</div>
             <div class="stop-card">
               <div>
                 <span class="stop-tag">Miraculous shrine</span>
@@ -1160,8 +1099,100 @@
             </div>
           </div>
 
+        </div>
+
+      </div>
+    </div>
+
+    <!-- MOUNTAIN TOUR -->
+    <div class="tour-panel" id="mountainTourPanel" role="tabpanel" aria-labelledby="mountainTourToggle" hidden>
+      <div class="tour-panel-photo placeholder"><span>Photo coming soon</span></div>
+      <div class="tour-panel-head">
+        <h3>Mountain Tour</h3>
+        <span>5 stops · Hills &amp; Viewpoints of Cebu</span>
+      </div>
+      <div class="tour-accordion-panel-inner">
+
+        <div class="route">
+
+          <div class="stop reveal">
+            <div class="stop-num">1</div>
+            <div class="stop-card">
+              <div>
+                <span class="stop-tag">Quiet & red</span>
+                <h3>Taoist Temple</h3>
+                <p>A serene hillside temple with sweeping city views, dragon-carved stairways, and a place to make a quiet wish.</p>
+              </div>
+              <div class="stop-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 010 18 4.5 4.5 0 010-9 4.5 4.5 0 000-9z"/></svg></div>
+            </div>
+          </div>
+
           <div class="stop reveal">
             <div class="stop-num">2</div>
+            <div class="stop-card">
+              <div>
+                <span class="stop-tag">City from above</span>
+                <h3>Tops of Cebu</h3>
+                <p>The highest viewpoint over Cebu City and the strait beyond — best for sunset and skyline photos.</p>
+              </div>
+              <div class="stop-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M3 17l5-7 4 5 3-4 6 6H3z"/></svg></div>
+            </div>
+          </div>
+
+          <div class="stop reveal">
+            <div class="stop-num">3</div>
+            <div class="stop-card">
+              <div>
+                <span class="stop-tag">Little Amsterdam of Cebu</span>
+                <h3>Sirao Garden</h3>
+                <p>A vibrant hillside flower farm in the mountains of Busay, famous for its rows of colorful blooms and garden photo spots.</p>
+              </div>
+              <div class="stop-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><circle cx="12" cy="8" r="3"/><path d="M12 11v10M9 21h6"/></svg></div>
+            </div>
+          </div>
+
+          <div class="stop reveal">
+            <div class="stop-num">4</div>
+            <div class="stop-card">
+              <div>
+                <span class="stop-tag">A son's tribute</span>
+                <h3>Temple of Leah</h3>
+                <p>Cebu's own "Taj Mahal" — a grand Roman-inspired temple built as a monument to lasting love.</p>
+              </div>
+              <div class="stop-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M4 21h16M6 21V10l6-5 6 5v11M10 21v-6h4v6"/></svg></div>
+            </div>
+          </div>
+
+          <div class="stop reveal">
+            <div class="stop-num">5</div>
+            <div class="stop-card">
+              <div>
+                <span class="stop-tag">Blooming hillside</span>
+                <h3>Buwakan ni Alejandra</h3>
+                <p>A colorful mountain garden with thousands of blooming flowers, scenic viewpoints, and relaxing nature walks.</p>
+              </div>
+              <div class="stop-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><circle cx="12" cy="8" r="3"/><path d="M12 11v10M9 21h6"/></svg></div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ROUND TRIP A -->
+    <div class="tour-panel" id="roundTripAPanel" role="tabpanel" aria-labelledby="roundTripAToggle" hidden>
+      <div class="tour-panel-photo placeholder"><span>Photo coming soon</span></div>
+      <div class="tour-panel-head">
+        <h3>Round Trip A</h3>
+        <span>3 stops · Oslob Whale Sharks &amp; Tumalog Falls</span>
+      </div>
+      <div class="tour-accordion-panel-inner">
+
+        <div class="route">
+
+          <div class="stop reveal">
+            <div class="stop-num">1</div>
             <div class="stop-card">
               <div>
                 <span class="stop-tag">Gentle giants</span>
@@ -1173,7 +1204,7 @@
           </div>
 
           <div class="stop reveal">
-            <div class="stop-num">3</div>
+            <div class="stop-num">2</div>
             <div class="stop-card">
               <div>
                 <span class="stop-tag">Curtain of white</span>
@@ -1185,7 +1216,47 @@
           </div>
 
           <div class="stop reveal">
-            <div class="stop-num">4</div>
+            <div class="stop-num">3</div>
+            <div class="stop-card">
+              <div>
+                <span class="stop-tag">Sandbar & lagoon</span>
+                <h3>Sumilon Island</h3>
+                <p>A protected marine sanctuary off Oslob with a shifting white sandbar, a turquoise lagoon, and some of the best snorkeling in southern Cebu.</p>
+              </div>
+              <div class="stop-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><circle cx="17" cy="6" r="2.5"/><path d="M2 18c2-4 6-6 10-6s8 2 10 6"/></svg></div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ROUND TRIP B -->
+    <div class="tour-panel" id="roundTripBPanel" role="tabpanel" aria-labelledby="roundTripBToggle" hidden>
+      <div class="tour-panel-photo placeholder"><span>Photo coming soon</span></div>
+      <div class="tour-panel-head">
+        <h3>Round Trip B</h3>
+        <span>3 stops · Oslob Whale Sharks &amp; Kawasan Falls</span>
+      </div>
+      <div class="tour-accordion-panel-inner">
+
+        <div class="route">
+
+          <div class="stop reveal">
+            <div class="stop-num">1</div>
+            <div class="stop-card">
+              <div>
+                <span class="stop-tag">Gentle giants</span>
+                <h3>Oslob Whale Sharks</h3>
+                <p>Swim alongside gentle whale sharks in the clear waters of Tan-awan, Oslob — a rare, up-close encounter with the world's largest fish.</p>
+              </div>
+              <div class="stop-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M3 12c3-4 8-6 13-4 2 .8 4 2.4 5 4-1 1.6-3 3.2-5 4-5 2-10 0-13-4z"/><path d="M16 8l3-3M16 16l3 3"/><circle cx="7" cy="12" r=".8" fill="currentColor" stroke="none"/></svg></div>
+            </div>
+          </div>
+
+          <div class="stop reveal">
+            <div class="stop-num">2</div>
             <div class="stop-card">
               <div>
                 <span class="stop-tag">Turquoise & canyons</span>
@@ -1197,7 +1268,7 @@
           </div>
 
           <div class="stop reveal">
-            <div class="stop-num">5</div>
+            <div class="stop-num">3</div>
             <div class="stop-card">
               <div>
                 <span class="stop-tag">Underwater spectacle</span>
@@ -1210,20 +1281,6 @@
 
         </div>
 
-      </div>
-    </div>
-
-    <!-- NORTH CEBU TOUR -->
-    <div class="tour-panel" id="northTourPanel" role="tabpanel" aria-labelledby="northTourToggle" hidden>
-      <div class="tour-panel-head">
-        <h3>North Cebu Tour</h3>
-        <span>Beaches, islands &amp; the northern towns</span>
-      </div>
-      <div class="tour-accordion-panel-inner">
-        <div class="coming-soon">
-          <span class="coming-soon-badge">Coming Soon</span>
-          <p>We're putting together the North Cebu route. Check back soon, or message us on Facebook and we'll let you know when it's ready.</p>
-        </div>
       </div>
     </div>
 
@@ -1393,9 +1450,26 @@
     if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); toggleSlide(); }
   });
 
-  /* ---------- TOUR TABS (City / South / North) ---------- */
+  /* ---------- TOUR TABS (City / Mountain / Round Trip A / Round Trip B) ---------- */
   const tourTabs = document.querySelectorAll('.tour-tab');
   const tourPanels = document.querySelectorAll('.tour-panel');
+
+  function coverVideoFrame(){
+    const wrap = document.getElementById('cityTourVideoWrap');
+    const frame = document.getElementById('cityTourVideoFrame');
+    if(!wrap || !frame) return;
+    const cw = wrap.clientWidth, ch = wrap.clientHeight;
+    if(!cw || !ch) return;
+    const videoRatio = 1000/500;
+    if(cw/ch > videoRatio){
+      frame.style.width = cw + 'px';
+      frame.style.height = (cw/videoRatio) + 'px';
+    } else {
+      frame.style.height = ch + 'px';
+      frame.style.width = (ch*videoRatio) + 'px';
+    }
+  }
+
   tourTabs.forEach(tab => {
     tab.addEventListener('click', () => {
       if(tab.classList.contains('active')) return;
@@ -1406,43 +1480,12 @@
       const target = document.getElementById(tab.getAttribute('aria-controls'));
       target.classList.add('active');
       target.hidden = false;
+      if(target.id === 'cityTourPanel') coverVideoFrame();
     });
   });
 
-  /* ---------- OPTIONAL ADD-ONS (8-9), nested inside City Tour panel ---------- */
-  function setAccordionHeight(panel, open){
-    if(open){
-      panel.classList.add('open');
-      panel.style.maxHeight = panel.scrollHeight + 'px';
-    } else {
-      panel.style.maxHeight = panel.scrollHeight + 'px'; // lock current height first
-      requestAnimationFrame(() => {
-        panel.style.maxHeight = '0px';
-      });
-      panel.classList.remove('open');
-    }
-  }
-
-  window.addEventListener('resize', () => {
-    const opt = document.querySelector('.optional-route.open');
-    if(opt) opt.style.maxHeight = opt.scrollHeight + 'px';
-  });
-
-  const optionalToggle = document.getElementById('optionalToggle');
-  const optionalStops = document.getElementById('optionalStops');
-  let optionalToggleLock = false; // guards against duplicate/ghost tap events on mobile
-  optionalToggle.addEventListener('click', () => {
-    if(optionalToggleLock) return;
-    optionalToggleLock = true;
-    setTimeout(() => { optionalToggleLock = false; }, 450);
-
-    const willOpen = !optionalStops.classList.contains('open');
-    setAccordionHeight(optionalStops, willOpen);
-    optionalToggle.setAttribute('aria-expanded', willOpen);
-    optionalToggle.querySelector('.toggle-text').textContent = willOpen
-      ? 'Hide optional add-ons (8–9)'
-      : 'Want 2 more stops? Show optional add-ons (8–9)';
-  });
+  coverVideoFrame();
+  window.addEventListener('resize', coverVideoFrame);
 
   /* ---------- CAR TYPE GALLERY ---------- */
   const carGalleries = {
