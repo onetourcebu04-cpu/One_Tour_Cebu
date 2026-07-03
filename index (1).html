@@ -1441,7 +1441,7 @@
     if(!wrap || !frame) return;
     const cw = wrap.clientWidth, ch = wrap.clientHeight;
     if(!cw || !ch) return;
-    const videoRatio = 16/9;
+    const videoRatio = 1000/500;
     if(cw/ch > videoRatio){
       frame.style.width = cw + 'px';
       frame.style.height = (cw/videoRatio) + 'px';
