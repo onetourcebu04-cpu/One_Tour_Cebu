@@ -1038,7 +1038,7 @@
     <div class="tour-panel active" id="cityTourPanel" role="tabpanel" aria-labelledby="cityTourToggle">
       <div class="tour-panel-photo tour-panel-video" id="cityTourVideoWrap">
         <iframe id="cityTourVideoFrame"
-          src="https://www.youtube.com/embed/o4bzjv-5zpk?autoplay=1&mute=1&loop=1&playlist=o4bzjv-5zpk&controls=0&showinfo=0&modestbranding=1&playsinline=1&rel=0&iv_load_policy=3"
+          src="https://www.youtube.com/embed/dIjA02bL60c?autoplay=1&mute=1&loop=1&playlist=dIjA02bL60c&controls=0&showinfo=0&modestbranding=1&playsinline=1&rel=0&iv_load_policy=3"
           title="City Tour highlight video" frameborder="0"
           referrerpolicy="strict-origin-when-cross-origin"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
@@ -1106,7 +1106,13 @@
 
     <!-- MOUNTAIN TOUR -->
     <div class="tour-panel" id="mountainTourPanel" role="tabpanel" aria-labelledby="mountainTourToggle" hidden>
-      <div class="tour-panel-photo placeholder"><span>Photo coming soon</span></div>
+      <div class="tour-panel-photo tour-panel-video" id="mountainTourVideoWrap">
+        <iframe id="mountainTourVideoFrame"
+          src="https://www.youtube.com/embed/pT900s8waPs?autoplay=1&mute=1&loop=1&playlist=pT900s8waPs&controls=0&showinfo=0&modestbranding=1&playsinline=1&rel=0&iv_load_policy=3"
+          title="Mountain Tour highlight video" frameborder="0"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
+      </div>
       <div class="tour-panel-head">
         <h3>Mountain Tour</h3>
         <span>5 stops · Hills &amp; Viewpoints of Cebu</span>
@@ -1455,19 +1461,20 @@
   const tourPanels = document.querySelectorAll('.tour-panel');
 
   function coverVideoFrame(){
-    const wrap = document.getElementById('cityTourVideoWrap');
-    const frame = document.getElementById('cityTourVideoFrame');
-    if(!wrap || !frame) return;
-    const cw = wrap.clientWidth, ch = wrap.clientHeight;
-    if(!cw || !ch) return;
-    const videoRatio = 1000/500;
-    if(cw/ch > videoRatio){
-      frame.style.width = cw + 'px';
-      frame.style.height = (cw/videoRatio) + 'px';
-    } else {
-      frame.style.height = ch + 'px';
-      frame.style.width = (ch*videoRatio) + 'px';
-    }
+    document.querySelectorAll('.tour-panel-video').forEach(wrap => {
+      const frame = wrap.querySelector('iframe');
+      if(!frame) return;
+      const cw = wrap.clientWidth, ch = wrap.clientHeight;
+      if(!cw || !ch) return;
+      const videoRatio = 1000/500;
+      if(cw/ch > videoRatio){
+        frame.style.width = cw + 'px';
+        frame.style.height = (cw/videoRatio) + 'px';
+      } else {
+        frame.style.height = ch + 'px';
+        frame.style.width = (ch*videoRatio) + 'px';
+      }
+    });
   }
 
   tourTabs.forEach(tab => {
@@ -1480,7 +1487,7 @@
       const target = document.getElementById(tab.getAttribute('aria-controls'));
       target.classList.add('active');
       target.hidden = false;
-      if(target.id === 'cityTourPanel') coverVideoFrame();
+      coverVideoFrame();
     });
   });
 
