@@ -1,0 +1,1602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>One Tour Cebu — Van Rentals & City Tours</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --teal-deep:#0B3D3A;
+    --teal-mid:#155049;
+    --coral:#FF6B4A;
+    --sand:#F4ECD8;
+    --gold:#D4A53D;
+    --cream:#FFFDF9;
+    --ink:#0B3D3A;
+    --line: rgba(11,61,58,0.15);
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+
+  h1,h2,h3,.display{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    letter-spacing:-0.01em;
+  }
+
+  a{color:inherit;text-decoration:none;}
+  img{display:block;max-width:100%;}
+
+  /* ---------- NAV ---------- */
+  header{
+    position:fixed;top:0;left:0;right:0;
+    z-index:50;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:22px 6%;
+    background:rgba(255,253,249,0.85);
+    backdrop-filter: blur(8px);
+    border-bottom:1px solid var(--line);
+    transition: padding .3s ease;
+  }
+.logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    font-family:'Fraunces',serif;
+    font-weight:700;
+    font-size:1.3rem;
+    color:var(--teal-deep);
+}
+
+.logo-text{
+    color:var(--teal-deep);   /* One Tour */
+}
+
+.logo-text .cebu{
+    color:var(--coral);       /* Cebu */
+}
+
+.logo-img{
+    width:52px;
+    height:52px;
+    border-radius:50%;
+    object-fit:cover;
+    background:#fff;
+
+    /* Green ring */
+    border:3px solid var(--teal-deep);
+
+    /* Makes the ring stand out */
+    padding:3px;
+
+    /* Soft shadow */
+    box-shadow:0 4px 12px rgba(11,61,58,0.25);
+
+    transition:.3s ease;
+}
+
+.logo-img:hover{
+    transform:scale(1.08);
+    box-shadow:0 8px 18px rgba(11,61,58,0.35);
+}
+  
+  nav ul{display:flex;gap:34px;list-style:none;}
+  nav a{
+    font-size:0.92rem;font-weight:500;color:var(--teal-deep);
+    position:relative;padding-bottom:4px;
+  }
+  nav a::after{
+    content:'';position:absolute;left:0;bottom:0;width:0;height:1.5px;background:var(--coral);
+    transition:width .25s ease;
+  }
+  nav a:hover::after{width:100%;}
+  .nav-cta{
+    background:var(--coral);color:#fff !important;
+    padding:11px 22px;border-radius:30px;font-weight:600;font-size:0.88rem;
+  }
+  /* back arrow — only shown inside mobile menu */
+  .nav-back-item{ display:none; }
+  .nav-back{ display:none; }
+  .nav-toggle{
+    display:none;
+    flex-direction:column;
+    justify-content:center;
+    gap:5px;
+    width:38px;height:38px;
+    background:none;border:none;cursor:pointer;
+    padding:4px;
+    position:fixed;
+    top:16px;
+    right:5%;
+    z-index:70;
+    flex-shrink:0;
+  }
+  .nav-toggle span{
+    display:block;
+    width:24px;height:2px;
+    background:var(--teal-deep);
+    border-radius:2px;
+    transition:transform .3s ease, opacity .3s ease, background .3s ease;
+    transform-origin:center;
+  }
+  /* spans go white when overlay is open */
+  .nav-toggle.open span{background:var(--cream);}
+
+  @media(max-width:860px){
+    header{padding:14px 5%;padding-right:calc(5% + 50px);}
+
+    .nav-toggle{display:flex;}
+
+    /* hamburger → X */
+    .nav-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+    .nav-toggle.open span:nth-child(2){opacity:0;transform:scaleX(0);}
+    .nav-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+    nav ul{
+      position:fixed;
+      top:0;left:0;right:0;
+      height:100vh;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      gap:0;
+      list-style:none;
+      background:var(--teal-deep);
+      padding:80px 6% 40px;
+      z-index:54;
+      transform:translateY(-100%);
+      transition:transform .4s cubic-bezier(.77,0,.18,1);
+      pointer-events:none;
+    }
+    nav ul.open{
+      transform:translateY(0);
+      pointer-events:all;
+    }
+    nav ul li{
+      width:100%;
+      border-bottom:1px solid rgba(255,253,249,0.1);
+    }
+    nav ul li:first-child{border-top:none;border-bottom:none;margin-bottom:16px;}
+    nav a{
+      display:block;
+      width:100%;
+      padding:18px 0;
+      font-size:1.15rem;
+      font-weight:600;
+      color:var(--cream);
+      text-align:center;
+      letter-spacing:.02em;
+    }
+    nav a::after{display:none;}
+    nav a:active{background:rgba(255,253,249,0.06);}
+
+    /* back arrow — visible only in mobile menu */
+    .nav-back-item{
+      display:flex;
+      border:none !important;
+      justify-content:flex-start;
+      width:100%;
+    }
+    .nav-back{
+      display:flex;align-items:center;gap:8px;
+      background:rgba(255,253,249,0.1);
+      border:1px solid rgba(255,253,249,0.25);
+      color:var(--cream);
+      font-family:'Inter',sans-serif;
+      font-size:.88rem;font-weight:600;
+      padding:10px 18px;
+      border-radius:30px;
+      cursor:pointer;
+      transition:background .2s ease;
+    }
+    .nav-back:hover{background:rgba(255,253,249,0.18);}
+
+    /* Book Now pill */
+    .nav-cta{
+      display:inline-block;
+      background:var(--coral);
+      color:#fff !important;
+      padding:14px 36px;
+      border-radius:34px;
+      margin-top:24px;
+      border:none;
+      width:auto;
+    }
+    nav ul li:has(.nav-cta){
+      border:none;
+      display:flex;
+      justify-content:center;
+    }
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    min-height:100vh;
+    display:flex;align-items:center;
+    position:relative;
+    padding:140px 6% 80px;
+    background:
+      radial-gradient(ellipse 70% 60% at 80% 10%, rgba(212,165,61,0.18), transparent 60%),
+      linear-gradient(160deg, var(--teal-deep) 0%, var(--teal-mid) 55%, #0d4640 100%);
+    color:var(--cream);
+    overflow:hidden;
+  }
+  .hero::before{
+    content:'';position:absolute;inset:0;
+    background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px);
+    background-size:26px 26px;
+    opacity:.5;
+  }
+  .hero-grid{
+    position:relative;z-index:2;
+    width:100%;
+    display:grid;
+    grid-template-columns:1.05fr 0.95fr;
+    gap:48px;
+    align-items:center;
+  }
+  .hero-inner{
+    max-width:640px;
+  }
+  .eyebrow{
+    text-transform:uppercase;letter-spacing:.18em;font-size:.78rem;
+    color:var(--gold);font-weight:600;margin-bottom:18px;display:block;
+  }
+  .hero h1{
+    font-size:clamp(2.6rem, 5.4vw, 4.2rem);
+    line-height:1.04;
+    color:var(--cream);
+    margin-bottom:22px;
+  }
+  .hero h1 em{
+    font-style:italic;color:var(--coral);font-weight:500;
+  }
+  .hero p.lead{
+    font-size:1.12rem;
+    max-width:520px;
+    color:rgba(255,253,249,0.82);
+    margin-bottom:36px;
+  }
+  .hero-cta-row{display:flex;gap:16px;flex-wrap:wrap;}
+  .btn-primary{
+    background:var(--coral);color:#fff;
+    padding:16px 30px;border-radius:34px;font-weight:600;
+    box-shadow:0 14px 30px -10px rgba(255,107,74,0.55);
+    transition:transform .25s ease;
+    border:none; cursor:pointer; font-family:inherit; font-size:1rem;
+  }
+  .btn-primary:hover{transform:translateY(-3px);}
+  .btn-ghost{
+    border:1.5px solid rgba(255,253,249,0.4);
+    padding:16px 28px;border-radius:34px;font-weight:600;
+    color:var(--cream);
+    transition:background .25s ease, border-color .25s ease;
+  }
+  .btn-ghost:hover{background:rgba(255,253,249,0.1);border-color:rgba(255,253,249,0.7);}
+
+  .hero-stats{
+    display:flex;gap:42px;margin-top:56px;flex-wrap:wrap;
+  }
+  .hero-stats div{border-left:2px solid var(--coral);padding-left:14px;}
+  .hero-stats strong{display:block;font-family:'Fraunces',serif;font-size:1.7rem;color:var(--cream);}
+  .hero-stats span{font-size:.82rem;color:rgba(255,253,249,0.65);}
+
+  /* ---------- HERO FLIP CARD (signature interaction) ---------- */
+  /* ---------- SLIDE CARD ---------- */
+  .hero-visual{
+    position:relative;
+    width:100%;
+    aspect-ratio:4/5;
+    max-width:420px;
+    margin:0 auto;
+    border-radius:22px;
+    overflow:hidden;
+    box-shadow:0 30px 60px -20px rgba(0,0,0,0.5);
+    cursor:pointer;
+  }
+
+  /* both panels fill the card absolutely */
+  .slide-front,
+  .slide-back{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    transition:transform .75s cubic-bezier(.77,0,.175,1);
+    will-change:transform;
+  }
+
+  /* FRONT starts visible, slides LEFT out on reveal */
+  .slide-front{
+    transform:translateX(0);
+    z-index:2;
+  }
+  .hero-visual.revealed .slide-front{
+    transform:translateX(-100%);
+  }
+
+  /* BACK starts off-screen RIGHT, slides into view on reveal */
+  .slide-back{
+    transform:translateX(100%);
+    background:var(--sand);
+    color:var(--teal-deep);
+    padding:36px 30px 28px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    z-index:1;
+  }
+  .hero-visual.revealed .slide-back{
+    transform:translateX(0);
+  }
+
+  /* FRONT — photo */
+  .slide-front img{
+    width:100%;height:100%;object-fit:cover;display:block;
+  }
+  .slide-front .hint{
+    position:absolute;left:0;right:0;bottom:0;
+    padding:20px 20px 18px;
+    background:linear-gradient(to top, rgba(11,61,58,0.88) 0%, transparent 100%);
+    font-size:.84rem;font-weight:600;letter-spacing:.04em;
+    display:flex;align-items:center;gap:9px;
+    color:var(--cream);
+  }
+  .slide-front .hint svg{
+    width:17px;height:17px;flex-shrink:0;
+    animation:hint-bounce 2s ease-in-out infinite;
+  }
+  @keyframes hint-bounce{
+    0%,100%{transform:translateX(0);}
+    50%{transform:translateX(5px);}
+  }
+
+  /* BACK — history text with staggered fade-up */
+  .slide-back .sb-eyebrow{
+    text-transform:uppercase;letter-spacing:.16em;font-size:.72rem;
+    color:var(--coral);font-weight:700;margin-bottom:8px;display:block;
+    opacity:0;transform:translateY(14px);
+    transition:opacity .4s ease, transform .4s ease;
+  }
+  .slide-back h3{
+    font-family:'Fraunces',serif;font-size:1.35rem;
+    color:var(--teal-deep);margin-bottom:14px;
+    opacity:0;transform:translateY(14px);
+    transition:opacity .4s ease, transform .4s ease;
+  }
+  .slide-back p{
+    font-size:.875rem;color:#3c4f4d;line-height:1.65;flex:1;
+    overflow-y:auto;min-height:0;
+    padding-right:10px;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:thin;
+    scrollbar-color: var(--coral) transparent;
+    opacity:0;transform:translateY(14px);
+    transition:opacity .4s ease, transform .4s ease;
+  }
+  .slide-back p::-webkit-scrollbar{width:5px;}
+  .slide-back p::-webkit-scrollbar-track{background:transparent;}
+  .slide-back p::-webkit-scrollbar-thumb{background:var(--coral);border-radius:10px;}
+  .slide-back .sb-hint{
+    margin-top:14px;font-size:.78rem;font-weight:600;color:var(--coral);
+    display:flex;align-items:center;gap:6px;
+    opacity:0;transform:translateY(10px);
+    transition:opacity .4s ease, transform .4s ease;
+  }
+  /* stagger delays fire after panel has slid in (~.75s) */
+  .hero-visual.revealed .slide-back .sb-eyebrow{
+    opacity:1;transform:translateY(0);transition-delay:.55s;
+  }
+  .hero-visual.revealed .slide-back h3{
+    opacity:1;transform:translateY(0);transition-delay:.63s;
+  }
+  .hero-visual.revealed .slide-back p{
+    opacity:1;transform:translateY(0);transition-delay:.71s;
+  }
+  .hero-visual.revealed .slide-back .sb-hint{
+    opacity:1;transform:translateY(0);transition-delay:.80s;
+  }
+
+  @media(max-width:900px){
+    .hero-grid{grid-template-columns:1fr;}
+    .hero-visual{max-width:360px;}
+  }
+
+  /* ---------- SECTION SHELL ---------- */
+  section{padding:110px 6%;}
+  .section-head{max-width:640px;margin-bottom:64px;}
+  .section-head .eyebrow{color:var(--coral);}
+  .section-head h2{font-size:clamp(2rem,3.6vw,2.8rem);color:var(--teal-deep);}
+  .section-head p{color:#4b5c5a;font-size:1.02rem;margin-top:14px;}
+
+  /* ---------- ROUTE / TOUR SECTION (signature) ---------- */
+  .route-section{background:var(--cream);position:relative;}
+  .route{
+    position:relative;
+    max-width:920px;margin:0 auto;
+  }
+  .route::before{
+    content:'';
+    position:absolute;
+    left:29px;top:14px;bottom:14px;
+    width:2px;
+    background-image: linear-gradient(var(--teal-deep) 60%, transparent 0%);
+    background-size: 2px 14px;
+    background-repeat: repeat-y;
+    opacity:.35;
+  }
+  @media(max-width:700px){.route::before{left:23px;}}
+
+  .stop{
+    display:grid;
+    grid-template-columns:60px 1fr;
+    gap:28px;
+    position:relative;
+    padding-bottom:58px;
+  }
+  @media(max-width:700px){.stop{grid-template-columns:46px 1fr;gap:18px;}}
+  .stop:last-child{padding-bottom:0;}
+  .stop-num{
+    width:60px;height:60px;border-radius:50%;
+    background:var(--teal-deep);
+    color:var(--gold);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Fraunces',serif;font-weight:600;font-size:1.3rem;
+    position:relative;z-index:2;
+    border:3px solid var(--cream);
+    box-shadow:0 0 0 2px var(--line);
+  }
+  @media(max-width:700px){.stop-num{width:46px;height:46px;font-size:1rem;}}
+  .stop-card{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:18px;
+    padding:30px 32px;
+    display:grid;
+    grid-template-columns:1fr auto;
+    gap:20px;
+    align-items:center;
+    transition:transform .25s ease, box-shadow .25s ease;
+  }
+  .stop-card:hover{transform:translateY(-4px);box-shadow:0 22px 40px -22px rgba(11,61,58,0.25);}
+  .stop-card h3{font-size:1.35rem;color:var(--teal-deep);margin-bottom:8px;}
+  .stop-card p{color:#5a6a68;font-size:.96rem;max-width:440px;}
+  .stop-tag{
+    font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--coral);font-weight:700;margin-bottom:6px;display:block;
+  }
+  .stop-icon{
+    width:64px;height:64px;border-radius:14px;
+    background:var(--sand);
+    display:flex;align-items:center;justify-content:center;
+    flex-shrink:0;
+  }
+  .stop-icon svg{width:30px;height:30px;stroke:var(--teal-deep);}
+  @media(max-width:620px){
+    .stop-card{grid-template-columns:1fr;text-align:left;}
+    .stop-icon{order:-1;margin-bottom:8px;}
+  }
+
+  /* ---------- OPTIONAL STOPS TOGGLE ---------- */
+  .optional-toggle-wrap{
+    max-width:920px;margin:0 auto 0;
+    display:flex;justify-content:center;
+  }
+  .optional-toggle{
+    display:flex;align-items:center;gap:10px;
+    background:var(--sand);
+    border:1px solid var(--line);
+    color:var(--teal-deep);
+    font-family:'Inter',sans-serif;
+    font-weight:600;font-size:.92rem;
+    padding:14px 26px;border-radius:30px;
+    cursor:pointer;
+    transition:background .25s ease, transform .25s ease;
+  }
+  .optional-toggle:hover{background:#eee3c6;}
+  .optional-toggle svg{width:16px;height:16px;transition:transform .35s ease;}
+  .optional-toggle[aria-expanded="true"] svg{transform:rotate(180deg);}
+
+  .optional-route{
+    max-height:0;
+    opacity:0;
+    overflow:hidden;
+    margin-top:0;
+    transition:max-height .5s ease, opacity .4s ease, margin-top .5s ease;
+  }
+  .optional-route.open{
+    opacity:1;
+    margin-top:48px;
+  }
+  .optional-route .stop:first-child{padding-top:8px;}
+
+  @media (prefers-reduced-motion: reduce){
+    .optional-route{transition:none;}
+  }
+
+  /* ---------- TOUR TABS (City / South / North) ---------- */
+  .tour-tabs{
+    max-width:640px;margin:0 auto 22px;
+    display:flex;gap:6px;
+    background:var(--sand);
+    border-radius:999px;
+    padding:6px;
+  }
+  .tour-tab{
+    flex:1;
+    border:none;background:transparent;
+    color:var(--teal-deep);
+    font-family:'Inter',sans-serif;font-weight:600;
+    font-size:.95rem;
+    padding:12px 10px;
+    border-radius:999px;
+    cursor:pointer;
+    transition:background .2s ease, color .2s ease;
+  }
+  .tour-tab:hover:not(.active){background:rgba(11,61,58,0.08);}
+  .tour-tab.active{background:var(--teal-deep);color:var(--cream);}
+
+  .tour-panel-card{
+    max-width:920px;margin:0 auto;
+    border:1px solid var(--line);
+    border-radius:20px;
+    background:#fff;
+    overflow:hidden;
+  }
+  .tour-panel{display:none;}
+  .tour-panel.active{display:block;}
+
+  .tour-panel-photo{
+    height:170px;
+    background-size:cover;
+    background-position:center;
+  }
+  .tour-panel-photo.tour-panel-video{
+    position:relative;
+    overflow:hidden;
+    background:var(--teal-deep);
+  }
+  .tour-panel-photo.tour-panel-video iframe{
+    position:absolute;
+    top:50%;left:50%;
+    border:none;
+    pointer-events:none;
+    transform:translate(-50%,-50%);
+  }
+  .tour-panel-photo.placeholder{
+    display:flex;align-items:center;justify-content:center;
+    background:linear-gradient(135deg, var(--teal-deep), var(--teal-mid));
+  }
+  .tour-panel-photo.placeholder span{
+    color:rgba(255,253,249,0.85);
+    font-size:.85rem;font-weight:500;letter-spacing:.02em;
+    border:1px solid rgba(255,253,249,0.35);
+    padding:8px 16px;border-radius:999px;
+  }
+
+  .tour-panel-head{
+    padding:26px 30px 18px;
+    border-bottom:1px solid var(--line);
+  }
+  .tour-panel-head h3{
+    font-family:'Fraunces',serif;font-weight:600;
+    font-size:1.3rem;color:var(--teal-deep);margin-bottom:4px;
+  }
+  .tour-panel-head span{
+    font-size:.85rem;color:#5a6a68;font-weight:400;
+  }
+  .tour-accordion-panel-inner{
+    padding:26px 30px 34px;
+  }
+
+  .coming-soon{
+    display:flex;align-items:center;gap:16px;flex-wrap:wrap;
+  }
+  .coming-soon-badge{
+    display:inline-block;background:var(--coral);color:#fff;
+    font-weight:700;font-size:.76rem;letter-spacing:.06em;text-transform:uppercase;
+    padding:8px 18px;border-radius:20px;flex-shrink:0;
+  }
+  .coming-soon p{color:#5a6a68;font-size:.95rem;}
+
+  @media(max-width:480px){
+    .tour-tab{font-size:.8rem;padding:10px 6px;}
+    .tour-panel-photo{height:130px;}
+    .tour-panel-head{padding:20px 20px 14px;}
+    .tour-panel-head h3{font-size:1.1rem;}
+    .tour-accordion-panel-inner{padding:22px 20px 28px;}
+    .coming-soon{gap:12px;}
+  }
+
+  /* ---------- FLEET ---------- */
+  .fleet-section{background:var(--teal-deep);color:var(--cream);}
+  .fleet-section .section-head h2{color:var(--cream);}
+  .fleet-section .section-head p{color:rgba(255,253,249,0.7);}
+  .fleet-grid{
+    display:grid;grid-template-columns:repeat(2,1fr);gap:26px;
+    max-width:760px;
+  }
+  @media(max-width:700px){.fleet-grid{grid-template-columns:1fr;}}
+  .fleet-card{
+    background:rgba(255,253,249,0.05);
+    border:1px solid rgba(255,253,249,0.15);
+    border-radius:18px;padding:34px 28px;
+  }
+  .fleet-card-top{
+    display:flex;align-items:center;justify-content:space-between;
+    margin-bottom:18px;gap:12px;
+  }
+  .fleet-card .seat-badge{
+    display:inline-block;background:var(--gold);color:var(--teal-deep);
+    font-weight:700;font-size:.78rem;padding:5px 14px;border-radius:20px;
+    margin-bottom:0;
+  }
+  .car-type-btn{
+    display:flex;align-items:center;gap:8px;
+    background:rgba(255,253,249,0.08);
+    border:1px solid rgba(255,253,249,0.25);
+    color:var(--cream);
+    padding:5px 14px 5px 6px;
+    border-radius:20px;
+    cursor:pointer;
+    font-family:'Inter',sans-serif;
+    font-size:.78rem;font-weight:600;
+    transition:background .2s ease, border-color .2s ease, transform .2s ease;
+  }
+  .car-type-btn:hover{background:rgba(255,253,249,0.16);border-color:rgba(255,253,249,0.4);transform:translateY(-1px);}
+  .car-type-btn img{
+    width:26px;height:26px;border-radius:50%;object-fit:cover;
+    background:#fff;flex-shrink:0;
+  }
+  .car-type-btn span{white-space:nowrap;}
+
+  .fleet-card h3{font-size:1.4rem;margin-bottom:10px;}
+  .fleet-card p{color:rgba(255,253,249,0.68);font-size:.94rem;margin-bottom:20px;}
+  .fleet-card ul{list-style:none;font-size:.9rem;color:rgba(255,253,249,0.85);display:flex;flex-direction:column;gap:8px;}
+  .fleet-card li::before{content:'— ';color:var(--coral);}
+
+  /* ---------- CAR TYPE MODAL ---------- */
+  .car-modal-overlay{
+    position:fixed;inset:0;z-index:200;
+    background:rgba(11,61,58,0.82);
+    display:flex;align-items:center;justify-content:center;
+    padding:24px;
+    opacity:0;pointer-events:none;
+    transition:opacity .25s ease;
+  }
+  .car-modal-overlay.open{opacity:1;pointer-events:all;}
+  .car-modal{
+    background:var(--cream);
+    border-radius:20px;
+    width:100%;max-width:640px;
+    max-height:88vh;
+    overflow:hidden;
+    display:flex;flex-direction:column;
+    transform:translateY(16px) scale(.97);
+    transition:transform .25s ease;
+  }
+  .car-modal-overlay.open .car-modal{transform:translateY(0) scale(1);}
+  .car-modal-head{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:20px 24px;border-bottom:1px solid var(--line);
+  }
+  .car-modal-head h3{font-size:1.2rem;color:var(--teal-deep);}
+  .car-modal-close{
+    background:none;border:none;cursor:pointer;
+    width:34px;height:34px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    color:var(--teal-deep);
+    transition:background .2s ease;
+  }
+  .car-modal-close:hover{background:rgba(11,61,58,0.08);}
+  .car-modal-close svg{width:18px;height:18px;}
+
+  .car-modal-stage{
+    position:relative;
+    background:rgba(11,61,58,0.05);
+    aspect-ratio:16/10;
+    display:flex;align-items:center;justify-content:center;
+    overflow:hidden;
+  }
+  .car-modal-stage img{
+    width:100%;height:100%;object-fit:cover;
+    display:block;
+  }
+  .car-modal-nav{
+    position:absolute;top:50%;transform:translateY(-50%);
+    width:40px;height:40px;border-radius:50%;
+    background:rgba(255,253,249,0.9);
+    border:none;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    color:var(--teal-deep);
+    box-shadow:0 4px 12px rgba(11,61,58,0.2);
+    transition:background .2s ease, transform .2s ease;
+  }
+  .car-modal-nav:hover{background:#fff;transform:translateY(-50%) scale(1.06);}
+  .car-modal-nav.prev{left:14px;}
+  .car-modal-nav.next{right:14px;}
+  .car-modal-nav svg{width:18px;height:18px;}
+
+  .car-modal-thumbs{
+    display:flex;gap:10px;padding:16px 24px;overflow-x:auto;
+  }
+  .car-modal-thumbs img{
+    width:64px;height:48px;object-fit:cover;border-radius:8px;
+    cursor:pointer;flex-shrink:0;
+    border:2px solid transparent;
+    opacity:.6;
+    transition:opacity .2s ease, border-color .2s ease;
+  }
+  .car-modal-thumbs img:hover{opacity:.9;}
+  .car-modal-thumbs img.active{opacity:1;border-color:var(--coral);}
+
+  @media(max-width:520px){
+    .fleet-card-top{flex-wrap:wrap;}
+    .car-type-btn span{display:none;}
+    .car-type-btn{padding:5px;}
+  }
+
+  /* ---------- WHY US ---------- */
+  .why-grid{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:30px;
+  }
+  @media(max-width:900px){.why-grid{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:560px){.why-grid{grid-template-columns:1fr;}}
+  .why-card h3{font-size:1.1rem;margin:16px 0 8px;color:var(--teal-deep);}
+  .why-card p{font-size:.92rem;color:#5a6a68;}
+  .why-num{
+    font-family:'Fraunces',serif;font-style:italic;font-size:1.6rem;color:var(--coral);
+  }
+
+  /* ---------- CTA BAND ---------- */
+  .cta-band{
+    background:linear-gradient(120deg, var(--coral), #ff8a6a);
+    color:#fff;border-radius:28px;
+    margin:0 6% 110px;
+    padding:64px 6%;
+    display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:30px;
+  }
+  .cta-band h2{color:#fff;font-size:clamp(1.7rem,3vw,2.3rem);max-width:520px;}
+  .cta-band .btn-primary{background:#fff;color:var(--coral);box-shadow:none;}
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    background:var(--teal-deep);color:rgba(255,253,249,0.7);
+    padding:60px 6% 30px;
+  }
+  .footer-grid{
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:40px;
+    border-bottom:1px solid rgba(255,253,249,0.15);
+    padding-bottom:40px;margin-bottom:24px;
+  }
+  .footer-grid h4{color:var(--cream);font-family:'Fraunces',serif;font-weight:600;margin-bottom:14px;}
+  .footer-grid ul{list-style:none;display:flex;flex-direction:column;gap:8px;font-size:.92rem;}
+  footer .bottom{text-align:center;font-size:.82rem;color:rgba(255,253,249,0.5);}
+
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease, transform .7s ease;}
+  .reveal.visible{opacity:1;transform:translateY(0);}
+
+  @media (prefers-reduced-motion: reduce){
+    .reveal{transition:none;opacity:1;transform:none;}
+    .slide-front,.slide-back{transition:none;}
+    .slide-back .sb-eyebrow,
+    .slide-back h3,
+    .slide-back p,
+    .slide-back .sb-hint{transition:none;opacity:1;transform:none;}
+    .slide-front .hint svg{animation:none;}
+    html{scroll-behavior:auto;}
+  }
+
+  /* ============================================================
+     MOBILE — 480px and below
+     ============================================================ */
+  @media(max-width:480px){
+
+    /* NAV */
+    header{padding:16px 5%;}
+    .logo{font-size:1.1rem;}
+
+    /* HERO */
+    .hero{padding:100px 5% 60px;}
+    .hero-grid{
+      grid-template-columns:1fr;
+      gap:32px;
+    }
+    .hero h1{font-size:2rem;line-height:1.1;}
+    .hero p.lead{font-size:.97rem;margin-bottom:28px;}
+    .eyebrow{font-size:.7rem;margin-bottom:12px;}
+    .btn-primary,.btn-ghost{
+      padding:13px 22px;font-size:.9rem;width:100%;text-align:center;
+      display:block;
+    }
+    .hero-cta-row{flex-direction:column;gap:10px;}
+    .hero-stats{
+      gap:20px;margin-top:36px;
+      display:grid;grid-template-columns:repeat(3,1fr);
+    }
+    .hero-stats strong{font-size:1.3rem;}
+    .hero-stats span{font-size:.72rem;}
+
+    /* SLIDE CARD — square on mobile, centered */
+    .hero-visual{
+      aspect-ratio:1/1;
+      max-width:100%;
+      margin:0 auto;
+      border-radius:16px;
+    }
+    .slide-back{padding:24px 20px 20px;}
+    .slide-back h3{font-size:1.1rem;margin-bottom:10px;}
+    .slide-back p{font-size:.82rem;line-height:1.6;}
+    .slide-back .sb-eyebrow{font-size:.67rem;}
+    .slide-back .sb-hint{font-size:.74rem;margin-top:10px;}
+
+    /* SECTIONS */
+    section{padding:64px 5%;}
+    .section-head{margin-bottom:40px;}
+    .section-head h2{font-size:1.7rem;}
+    .section-head p{font-size:.93rem;}
+
+    /* ROUTE STOPS */
+    .route::before{left:21px;}
+    .stop{grid-template-columns:42px 1fr;gap:14px;padding-bottom:40px;}
+    .stop-num{width:42px;height:42px;font-size:.9rem;border-width:2px;}
+    .stop-card{
+      padding:18px 16px;
+      grid-template-columns:1fr;
+      gap:12px;
+    }
+    .stop-card h3{font-size:1.1rem;}
+    .stop-card p{font-size:.88rem;}
+    .stop-tag{font-size:.68rem;}
+    .stop-icon{width:44px;height:44px;border-radius:10px;}
+    .stop-icon svg{width:22px;height:22px;}
+
+    /* OPTIONAL TOGGLE */
+    .optional-toggle{
+      font-size:.84rem;
+      padding:12px 18px;
+    }
+
+    /* FLEET */
+    .fleet-grid{grid-template-columns:1fr;gap:16px;max-width:100%;}
+    .fleet-card{padding:24px 20px;}
+    .fleet-card h3{font-size:1.2rem;}
+    .fleet-card p{font-size:.88rem;}
+    .fleet-card ul{font-size:.85rem;}
+
+    /* WHY US */
+    .why-grid{grid-template-columns:1fr;gap:24px;}
+    .why-card h3{font-size:1rem;}
+    .why-card p{font-size:.88rem;}
+    .why-num{font-size:1.4rem;}
+
+    /* CTA BAND */
+    .cta-band{
+      margin:0 5% 64px;
+      padding:40px 5%;
+      flex-direction:column;
+      align-items:flex-start;
+      border-radius:18px;
+    }
+    .cta-band h2{font-size:1.4rem;}
+    .cta-band .btn-primary{
+      width:100%;text-align:center;display:block;padding:14px 20px;
+    }
+
+    /* FOOTER */
+    footer{padding:48px 5% 24px;}
+    .footer-grid{
+      flex-direction:column;
+      gap:28px;
+    }
+    .footer-grid h4{font-size:1rem;margin-bottom:10px;}
+    footer .bottom{font-size:.76rem;}
+  }
+
+  /* ============================================================
+     TABLET — 481px to 768px
+     ============================================================ */
+  @media(min-width:481px) and (max-width:768px){
+
+    header{padding:18px 5%;}
+    .hero{padding:120px 5% 70px;}
+    .hero-grid{grid-template-columns:1fr;gap:36px;}
+    .hero h1{font-size:2.4rem;}
+    .hero p.lead{font-size:1rem;}
+    .hero-stats{gap:26px;}
+    .hero-visual{
+      max-width:380px;
+      aspect-ratio:4/5;
+    }
+
+    section{padding:80px 5%;}
+    .section-head h2{font-size:2rem;}
+
+    .stop-card{padding:22px 20px;}
+    .stop-card h3{font-size:1.2rem;}
+
+    .fleet-grid{grid-template-columns:1fr;max-width:100%;}
+
+    .cta-band{
+      flex-direction:column;
+      align-items:flex-start;
+      padding:44px 5%;
+      margin:0 5% 80px;
+    }
+    .cta-band h2{font-size:1.6rem;}
+
+    .footer-grid{flex-direction:column;gap:28px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <span class="logo-text">
+        One Tour <span class="cebu">Cebu</span>
+    </span>
+
+    <img
+        src="https://onetourcebu04-cpu.github.io/OTC_site_files/OTClogo.png"
+        alt="One Tour Cebu Logo"
+        class="logo-img">
+</div>
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+  <nav>
+    <ul id="navList">
+      <!-- back arrow to close menu -->
+      <li class="nav-back-item">
+        <button class="nav-back" id="navBack" aria-label="Close menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="20" height="20"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
+          Back
+        </button>
+      </li>
+      <li><a href="#route">City Tour</a></li>
+      <li><a href="#fleet">Van Rentals</a></li>
+      <li><a href="#why">Why Us</a></li>
+      <li><a href="#contact" class="nav-cta">Book Now</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-grid">
+    <div class="hero-inner">
+      <span class="eyebrow">Van Rentals · Family Cars · Cebu Province</span>
+      <h1>Cebu, the way <em>locals</em> would show you.</h1>
+      <p class="lead">One Tour Cebu pairs you with a roomy van or family car and a driver who knows every backroad — from centuries-old churches downtown to the rooftop views of the Cebu hills. Just get in. We'll handle the route.</p>
+      <div class="hero-cta-row">
+        <a href="#contact" class="btn-primary">Plan My Tour</a>
+        <a href="#route" class="btn-ghost">See the City Tour ↓</a>
+      </div>
+      <div class="hero-stats">
+        <div><strong>7-9</strong><span>Iconic stops, one route</span></div>
+        <div><strong>4–11</strong><span>Seats per vehicle</span></div>
+        <div><strong>1</strong><span>Driver-guide, all day</span></div>
+      </div>
+    </div>
+
+    <div class="hero-visual" id="heroVisual" role="button" tabindex="0" aria-label="Click to read a short history of Cebu province">
+
+      <!-- FRONT: photo -->
+      <div class="slide-front">
+        <img src="https://onetourcebu04-cpu.github.io/OTC_site_files/queencitytour.jpg" alt="Cebu City aerial view">
+        <div class="hint">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          Tap to read Cebu's story
+        </div>
+      </div>
+
+      <!-- BACK: short history -->
+      <div class="slide-back">
+        <div>
+          <span class="sb-eyebrow">A short history</span>
+          <h3>Cebu Province</h3>
+          <p>Cebu is widely regarded as the birthplace of Christianity in the Philippines, marked by Ferdinand Magellan's 1521 arrival and the planting of Magellan's Cross. It later grew into the country's first Spanish settlement and capital, Villa San Miguel, under Miguel López de Legazpi in 1565. Centuries of trade turned Cebu City into the "Queen City of the South," a hub linking the central Visayas to the rest of the archipelago. Today the province blends that colonial-era heritage — centuries-old churches, forts, and plazas — with the rolling hills of Busay and Toledo, and the white-sand islands of Bantayan, Malapascua, and Camotes just offshore.</p>
+        </div>
+        <span class="sb-hint">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>
+          Tap to go back
+        </span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="route-section" id="route">
+  <div class="section-head">
+    <span class="eyebrow">Cebu, one route at a time</span>
+    <h2>Pick a route. We'll handle the rest.</h2>
+    <p>Start with our signature City Tour — a full-day loop from the birthplace of Philippine Christianity to the highest hills overlooking Cebu City. Head south for waterfalls, canyons, and whale sharks — or check back soon for our North Cebu route.</p>
+  </div>
+
+  <div class="tour-tabs" role="tablist" aria-label="Choose a tour route">
+    <button type="button" class="tour-tab active" id="cityTourToggle" role="tab" aria-selected="true" aria-controls="cityTourPanel">City Tour</button>
+    <button type="button" class="tour-tab" id="southTourToggle" role="tab" aria-selected="false" aria-controls="southTourPanel">South Cebu</button>
+    <button type="button" class="tour-tab" id="northTourToggle" role="tab" aria-selected="false" aria-controls="northTourPanel">North Cebu</button>
+  </div>
+
+  <div class="tour-panel-card">
+
+    <!-- CITY TOUR -->
+    <div class="tour-panel active" id="cityTourPanel" role="tabpanel" aria-labelledby="cityTourToggle">
+      <div class="tour-panel-photo tour-panel-video" id="cityTourVideoWrap">
+        <iframe id="cityTourVideoFrame"
+          src="https://www.youtube.com/embed/o4bzjv-5zpk?autoplay=1&mute=1&loop=1&playlist=o4bzjv-5zpk&controls=0&showinfo=0&modestbranding=1&playsinline=1&rel=0&iv_load_policy=3"
+          title="City Tour highlight video" frameborder="0"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
+      </div>
+      <div class="tour-panel-head">
+        <h3>City Tour</h3>
+        <span>7–9 stops · The Heritage &amp; Hills Route</span>
+      </div>
+      <div class="tour-accordion-panel-inner">
+
+  <div class="route">
+
+    <div class="stop reveal">
+      <div class="stop-num">1</div>
+      <div class="stop-card">
+        <div>
+          <span class="stop-tag">Where it began</span>
+          <h3>Sto. Niño Church</h3>
+          <p>The oldest Roman Catholic church in the Philippines, home to the revered Sto. Niño image — the heart of Cebu's faith.</p>
+        </div>
+        <div class="stop-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M12 2l3 5h-2v3h4l1 3h-2v9H8v-9H6l1-3h4V7H9l3-5z"/></svg></div>
+      </div>
+    </div>
+
+    <div class="stop reveal">
+      <div class="stop-num">2</div>
+      <div class="stop-card">
+        <div>
+          <span class="stop-tag">First landmark</span>
+          <h3>Magellan's Cross</h3>
+          <p>Planted in 1521, this wooden cross marks the spot where Christianity was first introduced to the islands.</p>
+        </div>
+        <div class="stop-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M12 2v20M6 8h12"/></svg></div>
+      </div>
+    </div>
+
+    <div class="stop reveal">
+      <div class="stop-num">3</div>
+      <div class="stop-card">
+        <div>
+          <span class="stop-tag">Oldest fort</span>
+          <h3>Fort San Pedro</h3>
+          <p>A triangular Spanish military fortress by the harbor, now a quiet garden-and-museum stop with centuries of history in its walls.</p>
+        </div>
+        <div class="stop-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M4 21V9l8-6 8 6v12M9 21v-7h6v7"/></svg></div>
+      </div>
+    </div>
+
+    <div class="stop reveal">
+      <div class="stop-num">4</div>
+      <div class="stop-card">
+        <div>
+          <span class="stop-tag">Quiet & red</span>
+          <h3>Taoist Temple</h3>
+          <p>A serene hillside temple with sweeping city views, dragon-carved stairways, and a place to make a quiet wish.</p>
+        </div>
+        <div class="stop-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 010 18 4.5 4.5 0 010-9 4.5 4.5 0 000-9z"/></svg></div>
+      </div>
+    </div>
+
+    <div class="stop reveal">
+      <div class="stop-num">5</div>
+      <div class="stop-card">
+        <div>
+          <span class="stop-tag">City from above</span>
+          <h3>Tops Lookout</h3>
+          <p>The highest viewpoint over Cebu City and the strait beyond — best for sunset and skyline photos.</p>
+        </div>
+        <div class="stop-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M3 17l5-7 4 5 3-4 6 6H3z"/></svg></div>
+      </div>
+    </div>
+
+    <div class="stop reveal">
+      <div class="stop-num">6</div>
+      <div class="stop-card">
+        <div>
+          <span class="stop-tag">A son's tribute</span>
+          <h3>Temple of Leah</h3>
+          <p>Cebu's own "Taj Mahal" — a grand Roman-inspired temple built as a monument to lasting love.</p>
+        </div>
+        <div class="stop-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M4 21h16M6 21V10l6-5 6 5v11M10 21v-6h4v6"/></svg></div>
+      </div>
+    </div>
+
+    <div class="stop reveal">
+      <div class="stop-num">7</div>
+      <div class="stop-card">
+        <div>
+          <span class="stop-tag">Last stop, golden hour</span>
+          <h3>Sirao Garden</h3>
+          <p>Famously known as the "Little Amsterdam of Cebu," a vibrant hillside flower farm in the mountains of Busay, Cebu City.</p>
+        </div>
+        <div class="stop-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><circle cx="12" cy="8" r="3"/><path d="M12 11v10M9 21h6"/></svg></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="optional-toggle-wrap">
+    <button class="optional-toggle" id="optionalToggle" aria-expanded="false" aria-controls="optionalStops">
+      <span class="toggle-text">Want 2 more stops? Show optional add-ons (8–9)</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+    </button>
+  </div>
+
+  <div class="route optional-route" id="optionalStops">
+
+    <div class="stop reveal">
+      <div class="stop-num">8</div>
+      <div class="stop-card">
+        <div>
+          <span class="stop-tag">Optional add-on</span>
+          <h3>Buwakan ni Alejandra</h3>
+          <p>A colorful mountain garden with thousands of blooming flowers, scenic viewpoints, and relaxing nature walks.</p>
+        </div>
+        <div class="stop-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><circle cx="12" cy="8" r="3"/><path d="M12 11v10M9 21h6"/></svg></div>
+      </div>
+    </div>
+
+    <div class="stop reveal">
+      <div class="stop-num">9</div>
+      <div class="stop-card">
+        <div>
+          <span class="stop-tag">Optional add-on</span>
+          <h3>10,000 Roses</h3>
+          <p>A flower-filled garden café in the hills — the prettiest place to end the day with a coffee and a view.</p>
+        </div>
+        <div class="stop-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><circle cx="12" cy="8" r="3"/><path d="M12 11v10M9 21h6"/></svg></div>
+      </div>
+    </div>
+
+  </div>
+
+      </div>
+    </div>
+
+    <!-- SOUTH CEBU TOUR -->
+    <div class="tour-panel" id="southTourPanel" role="tabpanel" aria-labelledby="southTourToggle" hidden>
+      <div class="tour-panel-photo placeholder"><span>Photo coming soon</span></div>
+      <div class="tour-panel-head">
+        <h3>South Cebu Tour</h3>
+        <span>Waterfalls, whale sharks &amp; the southern coast</span>
+      </div>
+      <div class="tour-accordion-panel-inner">
+
+        <div class="route">
+
+          <div class="stop reveal">
+            <div class="stop-num">1</div>
+            <div class="stop-card">
+              <div>
+                <span class="stop-tag">Miraculous shrine</span>
+                <h3>Simala Church</h3>
+                <p>A grand, castle-like shrine in Sibonga known for its towering monastery architecture and the pilgrims who visit seeking miracles.</p>
+              </div>
+              <div class="stop-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M12 2l2 4h-4l2-4zM12 6v3M8 9h8l1 3H7l1-3zM6 12h12v9H6v-9zM10 21v-5h4v5"/></svg></div>
+            </div>
+          </div>
+
+          <div class="stop reveal">
+            <div class="stop-num">2</div>
+            <div class="stop-card">
+              <div>
+                <span class="stop-tag">Gentle giants</span>
+                <h3>Oslob Whale Sharks</h3>
+                <p>Swim alongside gentle whale sharks in the clear waters of Tan-awan, Oslob — a rare, up-close encounter with the world's largest fish.</p>
+              </div>
+              <div class="stop-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M3 12c3-4 8-6 13-4 2 .8 4 2.4 5 4-1 1.6-3 3.2-5 4-5 2-10 0-13-4z"/><path d="M16 8l3-3M16 16l3 3"/><circle cx="7" cy="12" r=".8" fill="currentColor" stroke="none"/></svg></div>
+            </div>
+          </div>
+
+          <div class="stop reveal">
+            <div class="stop-num">3</div>
+            <div class="stop-card">
+              <div>
+                <span class="stop-tag">Curtain of white</span>
+                <h3>Tumalog Falls</h3>
+                <p>A soft, wide waterfall in Samboan where fine mist curtains down over limestone rock — one of Cebu's most photogenic falls.</p>
+              </div>
+              <div class="stop-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M6 3v6c0 1 .5 2 2 2h8c1.5 0 2-1 2-2V3M8 11v6M12 11v10M16 11v6"/></svg></div>
+            </div>
+          </div>
+
+          <div class="stop reveal">
+            <div class="stop-num">4</div>
+            <div class="stop-card">
+              <div>
+                <span class="stop-tag">Turquoise & canyons</span>
+                <h3>Kawasan Falls</h3>
+                <p>Three-tiered turquoise falls in Badian, popular for canyoneering, cliff jumps, and bamboo raft rides through the canyon.</p>
+              </div>
+              <div class="stop-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M4 3l4 8-4 8M20 3l-4 8 4 8M10 21h4M11 11h2"/></svg></div>
+            </div>
+          </div>
+
+          <div class="stop reveal">
+            <div class="stop-num">5</div>
+            <div class="stop-card">
+              <div>
+                <span class="stop-tag">Underwater spectacle</span>
+                <h3>Sardine Run</h3>
+                <p>Snorkel or dive just meters from shore in Moalboal to swim through a massive, swirling school of sardines.</p>
+              </div>
+              <div class="stop-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><path d="M2 12c2-2 4-3 6-3s4 1 6 3-4 1-6 3-4-1-6-3z"/><path d="M14 12c2-1.5 4-2 6-2M14 12c2 1.5 4 2 6 2"/><circle cx="5" cy="12" r=".7" fill="currentColor" stroke="none"/></svg></div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <!-- NORTH CEBU TOUR -->
+    <div class="tour-panel" id="northTourPanel" role="tabpanel" aria-labelledby="northTourToggle" hidden>
+      <div class="tour-panel-photo placeholder"><span>Photo coming soon</span></div>
+      <div class="tour-panel-head">
+        <h3>North Cebu Tour</h3>
+        <span>Beaches, islands &amp; the northern towns</span>
+      </div>
+      <div class="tour-accordion-panel-inner">
+        <div class="coming-soon">
+          <span class="coming-soon-badge">Coming Soon</span>
+          <p>We're putting together the North Cebu route. Check back soon, or message us on Facebook and we'll let you know when it's ready.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="fleet-section" id="fleet">
+  <div class="section-head">
+    <span class="eyebrow">Pick your ride</span>
+    <h2>Vans and family cars, sized for your group.</h2>
+    <p>Every booking comes with a driver who doubles as your guide — fuel, parking, and the route already figured out.</p>
+  </div>
+  <div class="fleet-grid">
+    <div class="fleet-card">
+      <div class="fleet-card-top">
+        <button type="button" class="car-type-btn" data-car="sedan" aria-haspopup="dialog">
+          <img src="https://onetourcebu04-cpu.github.io/OTC_site_files/vios.jpg" alt="">
+          <span>Car type</span>
+        </button>
+        <span class="seat-badge">4–6 seats</span>
+      </div>
+      <h3>Family Sedan</h3>
+      <p>Easy and affordable for couples or small families doing the city tour.</p>
+      <ul>
+        <li>Air-conditioned</li>
+        <li>Ideal for city sightseeing</li>
+        <li>Best for light city traffic</li>
+      </ul>
+    </div>
+
+    <div class="fleet-card">
+      <div class="fleet-card-top">
+        <button type="button" class="car-type-btn" data-car="van" aria-haspopup="dialog">
+          <img src="https://onetourcebu04-cpu.github.io/OTC_site_files/toyotahiace.jpg" alt="">
+          <span>Car type</span>
+        </button>
+        <span class="seat-badge">8–11 seats</span>
+      </div>
+      <h3>Tourist Van</h3>
+      <p>Our most-booked option — roomy enough for the full heritage route in comfort.</p>
+      <ul>
+        <li>Reclining seats, extra legroom</li>
+        <li>Ample luggage space</li>
+        <li>Ideal for the full-day route</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<div class="car-modal-overlay" id="carModalOverlay" role="dialog" aria-modal="true" aria-labelledby="carModalTitle">
+  <div class="car-modal">
+    <div class="car-modal-head">
+      <h3 id="carModalTitle">Family Sedan</h3>
+      <button type="button" class="car-modal-close" id="carModalClose" aria-label="Close">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <div class="car-modal-stage">
+      <button type="button" class="car-modal-nav prev" id="carModalPrev" aria-label="Previous photo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <img id="carModalImg" src="" alt="">
+      <button type="button" class="car-modal-nav next" id="carModalNext" aria-label="Next photo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
+      </button>
+    </div>
+    <div class="car-modal-thumbs" id="carModalThumbs"></div>
+  </div>
+</div>
+
+<section id="why">
+  <div class="section-head">
+    <span class="eyebrow">Why ride with us</span>
+    <h2>Built for travelers who'd rather explore than navigate.</h2>
+  </div>
+  <div class="why-grid">
+    <div class="why-card">
+      <span class="why-num">01</span>
+      <h3>Driver-guides, not just drivers</h3>
+      <p>Every driver knows the stories behind each stop and the fastest way between them.</p>
+    </div>
+    <div class="why-card">
+      <span class="why-num">02</span>
+      <h3>No hidden fuel or toll fees</h3>
+      <p>One quoted price covers fuel, parking, and tolls for the whole day.</p>
+    </div>
+    <div class="why-card">
+      <span class="why-num">03</span>
+      <h3>Flexible, family-friendly routes</h3>
+      <p>Skip a stop, add a beach, or slow down — the itinerary bends around you.</p>
+    </div>
+    <div class="why-card">
+      <span class="why-num">04</span>
+      <h3>Clean, well-kept vehicles</h3>
+      <p>Sanitized, air-conditioned, and checked before every single trip out.</p>
+    </div>
+  </div>
+</section>
+
+<div class="cta-band" id="contact">
+  <h2>Ready to see Cebu from the inside of a van, not a screen?</h2>
+  <a href="https://www.facebook.com/OneTourCebu/" target="_blank" rel="noopener noreferrer" class="btn-primary">Message Us on Facebook</a>
+</div>
+
+<footer>
+  <div class="footer-grid">
+    <div>
+      <h4>One Tour Cebu</h4>
+      <p style="max-width:260px;font-size:.9rem;">Van and family car rentals for travelers exploring Cebu province, one route at a time.</p>
+    </div>
+    <div>
+      <h4>City Tour Stops</h4>
+      <ul>
+        <li>Sto. Niño Church</li>
+        <li>Magellan's Cross</li>
+        <li>Fort San Pedro</li>
+        <li>Taoist Temple</li>
+        <li>Tops Lookout</li>
+        <li>Temple of Leah</li>
+        <li>Sirao Garden</li>
+        <li>Buwakan ni Alejandra</li>
+        <li>10,000 Roses</li>
+      </ul>
+    </div>
+    <div>
+      <h4>Get in touch</h4>
+      <ul>
+        <li>Cebu City, Philippines</li>
+        <li>facebook.com/OneTourCebu/</li>
+        <li>onetourcebu04@gmail.com</li>
+      </ul>
+    </div>
+  </div>
+  <p class="bottom">© 2026 One Tour Cebu. Made for travelers who like the scenic route.</p>
+</footer>
+
+<script>
+  const toggle = document.getElementById('navToggle');
+  const navList = document.getElementById('navList');
+  const navBack = document.getElementById('navBack');
+
+  function closeMenu(){
+    navList.classList.remove('open');
+    toggle.classList.remove('open');
+  }
+
+  toggle.addEventListener('click', () => {
+    navList.classList.toggle('open');
+    toggle.classList.toggle('open');
+  });
+  navBack.addEventListener('click', closeMenu);
+  navList.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+
+  const reveals = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+  }, {threshold:0.15});
+  reveals.forEach(r => obs.observe(r));
+
+  const heroVisual = document.getElementById('heroVisual');
+  function toggleSlide(){
+    heroVisual.classList.toggle('revealed');
+  }
+  heroVisual.addEventListener('click', toggleSlide);
+  heroVisual.addEventListener('keydown', (e) => {
+    if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); toggleSlide(); }
+  });
+
+  /* ---------- TOUR TABS (City / South / North) ---------- */
+  const tourTabs = document.querySelectorAll('.tour-tab');
+  const tourPanels = document.querySelectorAll('.tour-panel');
+
+  function coverVideoFrame(){
+    const wrap = document.getElementById('cityTourVideoWrap');
+    const frame = document.getElementById('cityTourVideoFrame');
+    if(!wrap || !frame) return;
+    const cw = wrap.clientWidth, ch = wrap.clientHeight;
+    if(!cw || !ch) return;
+    const videoRatio = 1000/500;
+    if(cw/ch > videoRatio){
+      frame.style.width = cw + 'px';
+      frame.style.height = (cw/videoRatio) + 'px';
+    } else {
+      frame.style.height = ch + 'px';
+      frame.style.width = (ch*videoRatio) + 'px';
+    }
+  }
+
+  tourTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      if(tab.classList.contains('active')) return;
+      tourTabs.forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected','false'); });
+      tourPanels.forEach(p => { p.classList.remove('active'); p.hidden = true; });
+      tab.classList.add('active');
+      tab.setAttribute('aria-selected','true');
+      const target = document.getElementById(tab.getAttribute('aria-controls'));
+      target.classList.add('active');
+      target.hidden = false;
+      if(target.id === 'cityTourPanel') coverVideoFrame();
+    });
+  });
+
+  coverVideoFrame();
+  window.addEventListener('resize', coverVideoFrame);
+
+  /* ---------- OPTIONAL ADD-ONS (8-9), nested inside City Tour panel ---------- */
+  function setAccordionHeight(panel, open){
+    if(open){
+      panel.classList.add('open');
+      panel.style.maxHeight = panel.scrollHeight + 'px';
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + 'px'; // lock current height first
+      requestAnimationFrame(() => {
+        panel.style.maxHeight = '0px';
+      });
+      panel.classList.remove('open');
+    }
+  }
+
+  window.addEventListener('resize', () => {
+    const opt = document.querySelector('.optional-route.open');
+    if(opt) opt.style.maxHeight = opt.scrollHeight + 'px';
+  });
+
+  const optionalToggle = document.getElementById('optionalToggle');
+  const optionalStops = document.getElementById('optionalStops');
+  let optionalToggleLock = false; // guards against duplicate/ghost tap events on mobile
+  optionalToggle.addEventListener('click', () => {
+    if(optionalToggleLock) return;
+    optionalToggleLock = true;
+    setTimeout(() => { optionalToggleLock = false; }, 450);
+
+    const willOpen = !optionalStops.classList.contains('open');
+    setAccordionHeight(optionalStops, willOpen);
+    optionalToggle.setAttribute('aria-expanded', willOpen);
+    optionalToggle.querySelector('.toggle-text').textContent = willOpen
+      ? 'Hide optional add-ons (8–9)'
+      : 'Want 2 more stops? Show optional add-ons (8–9)';
+  });
+
+  /* ---------- CAR TYPE GALLERY ---------- */
+  const carGalleries = {
+    sedan: {
+      title: 'Family Sedan',
+      images: [
+        'https://onetourcebu04-cpu.github.io/OTC_site_files/vios.jpg',
+        'https://onetourcebu04-cpu.github.io/OTC_site_files/avanza2026.jpg',
+        'https://onetourcebu04-cpu.github.io/OTC_site_files/Toyota-Innova.jpg'
+      ]
+    },
+    van: {
+      title: 'Tourist Van',
+      images: [
+        'https://onetourcebu04-cpu.github.io/OTC_site_files/toyotahiace.jpg'
+      ]
+    }
+  };
+
+  const carModalOverlay = document.getElementById('carModalOverlay');
+  const carModalTitle   = document.getElementById('carModalTitle');
+  const carModalImg     = document.getElementById('carModalImg');
+  const carModalThumbs  = document.getElementById('carModalThumbs');
+  const carModalPrev    = document.getElementById('carModalPrev');
+  const carModalNext    = document.getElementById('carModalNext');
+  const carModalClose   = document.getElementById('carModalClose');
+
+  let currentCarImages = [];
+  let currentCarIndex = 0;
+
+  function renderCarSlide(){
+    carModalImg.src = currentCarImages[currentCarIndex];
+    carModalImg.alt = carModalTitle.textContent + ' photo ' + (currentCarIndex + 1);
+    carModalThumbs.querySelectorAll('img').forEach((t, i) => {
+      t.classList.toggle('active', i === currentCarIndex);
+    });
+    const multi = currentCarImages.length > 1;
+    carModalPrev.style.display = multi ? 'flex' : 'none';
+    carModalNext.style.display = multi ? 'flex' : 'none';
+  }
+
+  function openCarModal(type){
+    const data = carGalleries[type];
+    if(!data) return;
+    currentCarImages = data.images;
+    currentCarIndex = 0;
+    carModalTitle.textContent = data.title;
+
+    carModalThumbs.innerHTML = '';
+    if(data.images.length > 1){
+      data.images.forEach((src, i) => {
+        const t = document.createElement('img');
+        t.src = src;
+        t.alt = data.title + ' thumbnail ' + (i + 1);
+        t.addEventListener('click', () => { currentCarIndex = i; renderCarSlide(); });
+        carModalThumbs.appendChild(t);
+      });
+      carModalThumbs.style.display = 'flex';
+    } else {
+      carModalThumbs.style.display = 'none';
+    }
+
+    renderCarSlide();
+    carModalOverlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeCarModal(){
+    carModalOverlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll('.car-type-btn').forEach(btn => {
+    btn.addEventListener('click', () => openCarModal(btn.dataset.car));
+  });
+
+  carModalClose.addEventListener('click', closeCarModal);
+  carModalOverlay.addEventListener('click', (e) => {
+    if(e.target === carModalOverlay) closeCarModal();
+  });
+  carModalPrev.addEventListener('click', () => {
+    currentCarIndex = (currentCarIndex - 1 + currentCarImages.length) % currentCarImages.length;
+    renderCarSlide();
+  });
+  carModalNext.addEventListener('click', () => {
+    currentCarIndex = (currentCarIndex + 1) % currentCarImages.length;
+    renderCarSlide();
+  });
+  document.addEventListener('keydown', (e) => {
+    if(!carModalOverlay.classList.contains('open')) return;
+    if(e.key === 'Escape') closeCarModal();
+    if(e.key === 'ArrowLeft') carModalPrev.click();
+    if(e.key === 'ArrowRight') carModalNext.click();
+  });
+</script>
+
+</body>
+</html>
