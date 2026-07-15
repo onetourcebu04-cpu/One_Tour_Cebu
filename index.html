@@ -516,6 +516,7 @@
     transition:max-height .5s ease, opacity .4s ease, margin-top .5s ease;
   }
   .optional-route.open{
+    max-height:600px;
     opacity:1;
     margin-top:48px;
   }
@@ -1022,14 +1023,14 @@
   <div class="section-head">
     <span class="eyebrow">Cebu, one route at a time</span>
     <h2>Pick a route. We'll handle the rest.</h2>
-    <p>Four routes, each built around a different side of the province — heritage churches downtown, hilltop viewpoints, and two whale-shark round trips down south.</p>
+    <p>Two routes, each built around a different side of the province — heritage churches downtown and hilltop viewpoints above the city.</p>
   </div>
 
   <div class="tour-tabs" role="tablist" aria-label="Choose a tour route">
     <button type="button" class="tour-tab active" id="cityTourToggle" role="tab" aria-selected="true" aria-controls="cityTourPanel">City Tour</button>
     <button type="button" class="tour-tab" id="mountainTourToggle" role="tab" aria-selected="false" aria-controls="mountainTourPanel">Mountain Tour</button>
-    <button type="button" class="tour-tab" id="roundTripAToggle" role="tab" aria-selected="false" aria-controls="roundTripAPanel">Round Trip A</button>
-    <button type="button" class="tour-tab" id="roundTripBToggle" role="tab" aria-selected="false" aria-controls="roundTripBPanel">Round Trip B</button>
+    <button type="button" class="tour-tab" id="roundTripAToggle" role="tab" aria-selected="false" aria-controls="roundTripAPanel" style="display:none;">Round Trip A</button>
+    <button type="button" class="tour-tab" id="roundTripBToggle" role="tab" aria-selected="false" aria-controls="roundTripBPanel" style="display:none;">Round Trip B</button>
   </div>
 
   <div class="tour-panel-card">
@@ -1045,7 +1046,7 @@
       </div>
       <div class="tour-panel-head">
         <h3>City Tour</h3>
-        <span>4 stops · Heritage of Cebu</span>
+        <span>4 stops · Heritage of Cebu · +1 optional</span>
       </div>
       <div class="tour-accordion-panel-inner">
 
@@ -1101,6 +1102,27 @@
 
         </div>
 
+        <div class="optional-toggle-wrap">
+          <button type="button" class="optional-toggle" id="cityOptionalToggle" aria-expanded="false" aria-controls="cityOptionalRoute">
+            <span>+ Optional stop: 10,000 Roses</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+        </div>
+
+        <div class="optional-route" id="cityOptionalRoute">
+          <div class="stop reveal">
+            <div class="stop-num">+</div>
+            <div class="stop-card">
+              <div>
+                <span class="stop-tag">Optional add-on</span>
+                <h3>10,000 Roses</h3>
+                <p>A glowing garden of LED-lit white roses in Cordova, best seen at sunset when the lights switch on over the sea — a favorite for photos and a relaxed café stop.</p>
+              </div>
+              <div class="stop-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><circle cx="12" cy="8" r="3"/><path d="M12 11v10M9 21h6"/></svg></div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
 
@@ -1115,7 +1137,7 @@
       </div>
       <div class="tour-panel-head">
         <h3>Mountain Tour</h3>
-        <span>5 stops · Hills &amp; Viewpoints of Cebu</span>
+        <span>4 stops · Hills &amp; Viewpoints of Cebu · +1 optional</span>
       </div>
       <div class="tour-accordion-panel-inner">
 
@@ -1169,8 +1191,18 @@
             </div>
           </div>
 
+        </div>
+
+        <div class="optional-toggle-wrap">
+          <button type="button" class="optional-toggle" id="mountainOptionalToggle" aria-expanded="false" aria-controls="mountainOptionalRoute">
+            <span>+ Optional stop: Buwakan ni Alejandra</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+        </div>
+
+        <div class="optional-route" id="mountainOptionalRoute">
           <div class="stop reveal">
-            <div class="stop-num">5</div>
+            <div class="stop-num">+</div>
             <div class="stop-card">
               <div>
                 <span class="stop-tag">Blooming hillside</span>
@@ -1180,7 +1212,6 @@
               <div class="stop-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6"><circle cx="12" cy="8" r="3"/><path d="M12 11v10M9 21h6"/></svg></div>
             </div>
           </div>
-
         </div>
 
       </div>
@@ -1505,6 +1536,16 @@
 
   coverVideoFrame();
   window.addEventListener('resize', coverVideoFrame);
+
+  /* ---------- OPTIONAL STOP DROPDOWNS ---------- */
+  document.querySelectorAll('.optional-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!expanded));
+      const target = document.getElementById(btn.getAttribute('aria-controls'));
+      if(target) target.classList.toggle('open');
+    });
+  });
 
   /* ---------- CAR TYPE GALLERY ---------- */
   const carGalleries = {
